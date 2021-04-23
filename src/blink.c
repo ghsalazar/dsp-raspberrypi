@@ -35,5 +35,6 @@ int main()
 
     gpiod_line_set_value(led, 1);
     gpiod_line_release(led);
+    gpiod_line_release(button);
     return 0;
 }
