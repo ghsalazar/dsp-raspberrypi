@@ -1,0 +1,3 @@
+[submodule "etc/mdweb"]
+	path = etc/mdweb
+	url = https://github.com/ghsalazar/mdweb.git
