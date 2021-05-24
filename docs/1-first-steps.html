@@ -1,0 +1,9 @@
+<h1 id="setting-the-raspberry-pi">Setting the Raspberry Pi</h1>
+<h1 id="registers">Registers</h1>
+<h2 id="moving-data-to-registers">Moving data to registers</h2>
+<h3 id="un-primer-ejemplo-en-ensamblador">Un primer ejemplo en ensamblador</h3>
+<script src="http://gist-it.appspot.com/https://github.com/ghsalazar/dsp-raspberrypi/raw/main/examples/forty-two.s"></script>
+<div class="sourceCode" id="cb1" name="forty-two.s" data-caption="forty-two.s" data-numbers="left" data-frame="leftline"><pre class="sourceCode s"><code class="sourceCode gnuassembler"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">.global</span> main</a></code></pre></div>
+<div class="sourceCode" id="cb2" name="forty-two.s" data-caption="forty-two.s" data-numbers="left" data-frame="leftline"><pre class="sourceCode s"><code class="sourceCode gnuassembler"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">main:</span></a></code></pre></div>
+<div class="sourceCode" id="cb3" name="forty-two.s" data-caption="forty-two.s" data-numbers="left" data-frame="leftline"><pre class="sourceCode s"><code class="sourceCode gnuassembler"><a class="sourceLine" id="cb3-1" title="1">    mov r0, <span class="co">#42</span></a>
+<a class="sourceLine" id="cb3-2" title="2">    bx lr</a></code></pre></div>
