@@ -1,5 +1,6 @@
 all:
-	make -C bin
+	make -C examples
+	make -C docs
 
 .PHONNY: clean
 

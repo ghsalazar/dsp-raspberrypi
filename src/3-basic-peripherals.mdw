@@ -65,12 +65,14 @@ línea de comando.
 
 # Actividad: Comando `pinout`
 
-* En la Raspberry Pi, se dispone del comando `pinout` que permite consultar la
-  disposición de las terminales del conector de la interfaz GPIO
-  [@RaspberryPiFoundation2020]
+En la Raspberry Pi, podemos consultar la disposición de las terminales del
+conector de la interfaz GPIO, por medio del comando `pinout`
+[@RaspberryPiFoundation2020].
+    
+![**Figura 3**: Resultado de la ejecución del comando `pinout`
+[@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/usage/gpio/images/gpiozero-pinout.png){width=50%}
 
-  ![**Figura 3**: Resultado de la ejecución del comando `pinout`
-  [@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/usage/gpio/images/gpiozero-pinout.png){width=50%}
+
 
 # Actividad: Instalar `gpiod`
 
