@@ -241,7 +241,7 @@ En el siguiente segmento de código tenemos la definición del primer objeto.
 @
 
 En el lenguaje C, no tenemos objetos como tal; pero podemos agrupar una serie de
-atributos por medio de estructuras. La estructura de datos que vamos a tulizar
+atributos por medio de estructuras. La estructura de datos que vamos a utilizar
 es `gpiod_chip`. Dicha estructura está declarada en el archivo de encabezado
 `gpiod.h`. El objeto ocupará un espacio en la memoria y utilizamos el
 [puntero](https://es.wikipedia.org/wiki/Puntero_(inform%C3%A1tica)) `chip` para
@@ -259,11 +259,19 @@ archivo de encabezado `gpiod.h` y definida el la librería `libgpiod`. La funci�
 toma un espacio de memoria, le asigna valores determinados y regresa la
 dirección del espacio de memoria.
 
+A continuación, realizaremos la declaración para dos punteros más.
+
 <<blink.c>>=
     struct gpiod_line *led;
     struct gpiod_line *button;
 
 @
+
+El puntero `led` se utilizará para localizar el objeto que se utilizará para
+controlar un led. Por otro lado, `button` apuntará al objeto que estará
+relacionado con la entrada de un botón.
+
+Luego, se inicializarán ambos objetos.
 
 <<blink.c>>=
     led    = gpiod_chip_get_line(chip, 24);
@@ -271,6 +279,10 @@ dirección del espacio de memoria.
 
 @
 
+La función `gpiod_chip_get_line` sirve para asignar la memoria de ambos objetos
+y regresa la dirección de memoria de cada objeto. El objeto en si está
+relacionado con el pin físico de la GPIO que se desea utilizar. En el caso del
+led, se utilizará el pin 24. Por otro lado, al botón se le asignará el pin 6.
 
 <<blink.c>>=
     gpiod_line_request_output(led, "myLED", 0);
