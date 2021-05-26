@@ -5,4 +5,6 @@ all:
 .PHONNY: clean
 
 clean:
-	make -C bin $@
+	make -C docs clean
+	make -C examples clean
+	
