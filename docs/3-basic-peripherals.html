@@ -41,13 +41,11 @@
 <img src="https://www.raspberrypi.org/documentation/usage/gpio/images/gpiozero-pinout.png" alt="Figura 3: Resultado de la ejecución del comando pinout [@RaspberryPiFoundation2020]" style="width:50.0%" /><figcaption><strong>Figura 3</strong>: Resultado de la ejecución del comando <code>pinout</code> <span class="citation" data-cites="RaspberryPiFoundation2020">[@RaspberryPiFoundation2020]</span></figcaption>
 </figure>
 <h1 id="actividad-instalar-gpiod">Actividad: Instalar <code>gpiod</code></h1>
-<script src="https://gist.github.com/ghsalazar/16f05dc4b5b3fa8779e2453792d90491.js"></script>
+<div class="sourceCode" id="cb1" name="raspberry-install-gpiod.sh" data-caption="raspberry-install-gpiod.sh" data-numbers="left" data-frame="leftline"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">sudo</span> apt update</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">sudo</span> apt -y install gpiod</a></code></pre></div>
 <h1 id="actividad-interfaz-en-línea-de-comando">Actividad: Interfaz en línea de comando</h1>
-<ul>
-<li>Ensamble el circuito de la figura.</li>
-</ul>
 <figure>
-<img src="https://github.com/ghsalazar/dsp-images/raw/main/images/raspberry-pi-gpio-led.png" alt="Figura." /><figcaption><strong>Figura</strong>.</figcaption>
+<img src="https://github.com/ghsalazar/dsp-images/raw/main/images/raspberry-pi-gpio-led.png" alt="Figura. Ensamble el circuito de la figura." /><figcaption><strong>Figura</strong>. Ensamble el circuito de la figura.</figcaption>
 </figure>
 <p>Para instalar los programas de <code>gpiod</code>, empezaremos por actualizar el sistema de paquetes del Raspeberry Pi OS y después realizar la instalación como tal, utilizando la línea de comando de la Raspberry. Podemos ver las instrucciones en el siguiente listado:</p>
 <script src="https://gist.github.com/ghsalazar/4c0a808caf64df5a3efa01a4f463d479.js"></script>
@@ -77,44 +75,44 @@
 <h1 id="interfaz-en-c">Interfaz en C</h1>
 <p>El uso de programas en el espacio de usuario puede permitir acelerar el desarrollo de una aplicación; sin embargo, este tipo de programas pueden alentar un proceso. Por lo tanto, conviene normalmente utilizar un lenguaje compilado para asegurar un mejor desempeño.</p>
 <p>Al instalar los programas en el espacio del usuario, se incluyó el paquete de la librería <code>libgpio</code>; pero para poder desarrollar un programa en C se necesita además los archivos de encabezado. Para ello instalaremos el paquete <code>libgpio-dev</code> por medio de las siguientes instrucciones</p>
-<script src="https://gist.github.com/ghsalazar/88d2eff62bd5909328d5e27d1e1a74f3.js"></script>
+<div class="sourceCode" id="cb5" name="raspberry-install-gpiod.sh" data-caption="raspberry-install-gpiod.sh" data-numbers="left" data-frame="leftline"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">sudo</span> apt install libgpiod-dev</a></code></pre></div>
 <p>Una vez instalada la librería es posible desarrollar un programa en C, como el del ejemplo del siguiente listado.</p>
 <h2 id="gpiod">gpiod</h2>
 <script src="http://gist-it.appspot.com/https://github.com/ghsalazar/dsp-raspberrypi/raw/main/examples/blink.c"></script>
-<div class="sourceCode" id="cb4" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb4-1" title="1"><span class="co">/** Es un pequeño ejemplo de las funcionalidades del interfaz del GPIO  */</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="co">/** de la Raspberry Pi por medio de la librería libgpiod.               */</span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="co">/**                                                                     */</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co">/** Para compilar el programa, se debe utilizar el comando:             */</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co">/**     gcc blink.c -lgpiod -o blink                                    */</span></a>
-<a class="sourceLine" id="cb4-6" title="6"></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="pp">#include </span><span class="im">&lt;gpiod.h&gt;</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="pp">#include </span><span class="im">&lt;unistd.h&gt;</span></a>
-<a class="sourceLine" id="cb4-9" title="9"></a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="dt">int</span> main()</a>
-<a class="sourceLine" id="cb4-11" title="11">{</a>
-<a class="sourceLine" id="cb4-12" title="12">    <span class="dt">int</span> state = <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb4-13" title="13">    <span class="dt">int</span> input = <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb4-14" title="14"></a>
-<a class="sourceLine" id="cb4-15" title="15">    <span class="kw">struct</span> gpiod_chip *chip;</a>
-<a class="sourceLine" id="cb4-16" title="16">    chip = gpiod_chip_open_by_name(<span class="st">&quot;gpiochip0&quot;</span>);</a>
-<a class="sourceLine" id="cb4-17" title="17"></a>
-<a class="sourceLine" id="cb4-18" title="18">    <span class="kw">struct</span> gpiod_line *led;</a>
-<a class="sourceLine" id="cb4-19" title="19">    led = gpiod_chip_get_line(chip, <span class="dv">24</span>);</a>
-<a class="sourceLine" id="cb4-20" title="20">    gpiod_line_request_output(led, <span class="st">&quot;myLED&quot;</span>, <span class="dv">0</span>);</a>
-<a class="sourceLine" id="cb4-21" title="21"></a>
-<a class="sourceLine" id="cb4-22" title="22">    <span class="kw">struct</span> gpiod_line *button;</a>
-<a class="sourceLine" id="cb4-23" title="23">    button = gpiod_chip_get_line(chip, <span class="dv">6</span>);</a>
-<a class="sourceLine" id="cb4-24" title="24">    gpiod_line_request_input(button, <span class="st">&quot;button&quot;</span>);</a>
-<a class="sourceLine" id="cb4-25" title="25"></a>
-<a class="sourceLine" id="cb4-26" title="26">    <span class="cf">while</span> (input == <span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb4-27" title="27">        state = state ^ <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb4-28" title="28">        gpiod_line_set_value(led, state);</a>
-<a class="sourceLine" id="cb4-29" title="29">        input = gpiod_line_get_value(button);</a>
-<a class="sourceLine" id="cb4-30" title="30">        usleep(<span class="dv">500000</span>);</a>
-<a class="sourceLine" id="cb4-31" title="31">    }</a>
-<a class="sourceLine" id="cb4-32" title="32"></a>
-<a class="sourceLine" id="cb4-33" title="33">    gpiod_line_set_value(led, <span class="dv">1</span>);</a>
-<a class="sourceLine" id="cb4-34" title="34">    gpiod_line_release(led);</a>
-<a class="sourceLine" id="cb4-35" title="35">    gpiod_line_release(button);</a>
-<a class="sourceLine" id="cb4-36" title="36">    <span class="cf">return</span> <span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb4-37" title="37">}</a></code></pre></div>
+<div class="sourceCode" id="cb6" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb6-1" title="1"><span class="co">/** Es un pequeño ejemplo de las funcionalidades del interfaz del GPIO  */</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">/** de la Raspberry Pi por medio de la librería libgpiod.               */</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co">/**                                                                     */</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">/** Para compilar el programa, se debe utilizar el comando:             */</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co">/**     gcc blink.c -lgpiod -o blink                                    */</span></a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="pp">#include </span><span class="im">&lt;gpiod.h&gt;</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="pp">#include </span><span class="im">&lt;unistd.h&gt;</span></a>
+<a class="sourceLine" id="cb6-9" title="9"></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb6-11" title="11">{</a>
+<a class="sourceLine" id="cb6-12" title="12">    <span class="dt">int</span> state = <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb6-13" title="13">    <span class="dt">int</span> input = <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb6-14" title="14"></a>
+<a class="sourceLine" id="cb6-15" title="15">    <span class="kw">struct</span> gpiod_chip *chip;</a>
+<a class="sourceLine" id="cb6-16" title="16">    chip = gpiod_chip_open_by_name(<span class="st">&quot;gpiochip0&quot;</span>);</a>
+<a class="sourceLine" id="cb6-17" title="17"></a>
+<a class="sourceLine" id="cb6-18" title="18">    <span class="kw">struct</span> gpiod_line *led;</a>
+<a class="sourceLine" id="cb6-19" title="19">    led = gpiod_chip_get_line(chip, <span class="dv">24</span>);</a>
+<a class="sourceLine" id="cb6-20" title="20">    gpiod_line_request_output(led, <span class="st">&quot;myLED&quot;</span>, <span class="dv">0</span>);</a>
+<a class="sourceLine" id="cb6-21" title="21"></a>
+<a class="sourceLine" id="cb6-22" title="22">    <span class="kw">struct</span> gpiod_line *button;</a>
+<a class="sourceLine" id="cb6-23" title="23">    button = gpiod_chip_get_line(chip, <span class="dv">6</span>);</a>
+<a class="sourceLine" id="cb6-24" title="24">    gpiod_line_request_input(button, <span class="st">&quot;button&quot;</span>);</a>
+<a class="sourceLine" id="cb6-25" title="25"></a>
+<a class="sourceLine" id="cb6-26" title="26">    <span class="cf">while</span> (input == <span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb6-27" title="27">        state = state ^ <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb6-28" title="28">        gpiod_line_set_value(led, state);</a>
+<a class="sourceLine" id="cb6-29" title="29">        input = gpiod_line_get_value(button);</a>
+<a class="sourceLine" id="cb6-30" title="30">        usleep(<span class="dv">500000</span>);</a>
+<a class="sourceLine" id="cb6-31" title="31">    }</a>
+<a class="sourceLine" id="cb6-32" title="32"></a>
+<a class="sourceLine" id="cb6-33" title="33">    gpiod_line_set_value(led, <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb6-34" title="34">    gpiod_line_release(led);</a>
+<a class="sourceLine" id="cb6-35" title="35">    gpiod_line_release(button);</a>
+<a class="sourceLine" id="cb6-36" title="36">    <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb6-37" title="37">}</a></code></pre></div>
