@@ -221,29 +221,59 @@ declaración de la función
 [usleep(3)](https://man7.org/linux/man-pages/man3/usleep.3.html), que suspende
 la ejecución del programa por un intervalo medido en microsegundos (us).
 
+Por otro lado, en el archivo `gpiod.h` tenemos las declaraciones de las
+funciones que nos permiten acceder a la GPIO de la Raspberry Pi.
+
+A continuación, tenemos el inicio de la definición de la función `main`.
 
 <<blink.c>>=
 int main()
 {
 @
 
+Hay que recordar que en el lenguaje C, la función `main` es donde reside el
+programa principal.
+
+En el siguiente segmento de código tenemos la definición del primer objeto.
 
 <<blink.c>>=
     struct gpiod_chip *chip;
+@
+
+En el lenguaje C, no tenemos objetos como tal; pero podemos agrupar una serie de
+atributos por medio de estructuras. La estructura de datos que vamos a tulizar
+es `gpiod_chip`. Dicha estructura está declarada en el archivo de encabezado
+`gpiod.h`. El objeto ocupará un espacio en la memoria y utilizamos el
+[puntero](https://es.wikipedia.org/wiki/Puntero_(inform%C3%A1tica)) `chip` para
+almacenar la dirección de ese espacio de memoria.
+
+A continuación, produciremos el el objeto por medio de la siguiente línea.
+
+<<blink.c>>=
     chip = gpiod_chip_open_by_name("gpiochip0");
 
 @
 
+La función `gpiod_chip_open_by_name` también se encuentra declarada en el
+archivo de encabezado `gpiod.h` y definida el la librería `libgpiod`. La función
+toma un espacio de memoria, le asigna valores determinados y regresa la
+dirección del espacio de memoria.
+
 <<blink.c>>=
     struct gpiod_line *led;
-    led = gpiod_chip_get_line(chip, 24);
-    gpiod_line_request_output(led, "myLED", 0);
+    struct gpiod_line *button;
 
 @
 
 <<blink.c>>=
-    struct gpiod_line *button;
+    led    = gpiod_chip_get_line(chip, 24);
     button = gpiod_chip_get_line(chip, 6);
+
+@
+
+
+<<blink.c>>=
+    gpiod_line_request_output(led, "myLED", 0);
     gpiod_line_request_input(button, "button");
 
 @
@@ -273,7 +303,7 @@ int main()
     gpiod_line_set_value(led, 1);
     gpiod_line_release(led);
     gpiod_line_release(button);
-    
+
     return 0;
 }
 @

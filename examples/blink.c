@@ -13,11 +13,12 @@ int main()
     chip = gpiod_chip_open_by_name("gpiochip0");
 
     struct gpiod_line *led;
-    led = gpiod_chip_get_line(chip, 24);
-    gpiod_line_request_output(led, "myLED", 0);
-
     struct gpiod_line *button;
+
+    led    = gpiod_chip_get_line(chip, 24);
     button = gpiod_chip_get_line(chip, 6);
+
+    gpiod_line_request_output(led, "myLED", 0);
     gpiod_line_request_input(button, "button");
 
     int state = 1;
@@ -32,6 +33,6 @@ int main()
     gpiod_line_set_value(led, 1);
     gpiod_line_release(led);
     gpiod_line_release(button);
-    
+
     return 0;
 }
