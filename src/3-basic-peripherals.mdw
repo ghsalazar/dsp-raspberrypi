@@ -73,14 +73,11 @@ conector de la interfaz GPIO, por medio del comando `pinout`
 [@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/usage/gpio/images/gpiozero-pinout.png){width=50%}
 
 
-# Actividad: Instalar `gpiod`
-
-<<raspberry-install-gpiod.sh>>=
-sudo apt update
-sudo apt -y install gpiod
-@
-
 # Actividad: Interfaz en línea de comando
+
+## Actividad: Instalar `gpiod`
+
+
 
 ![**Figura**. Ensamble el circuito de la figura.](https://github.com/ghsalazar/dsp-images/raw/main/images/raspberry-pi-gpio-led.png)
 
@@ -89,14 +86,18 @@ paquetes del Raspeberry Pi OS y después realizar la instalación como tal,
 utilizando la línea de comando de la Raspberry. Podemos ver las instrucciones en
 el siguiente listado:
 
-<script src="https://gist.github.com/ghsalazar/4c0a808caf64df5a3efa01a4f463d479.js"></script>
-
+<<raspberry-install-gpiod.sh>>=
+sudo apt update
+sudo apt -y install gpiod
+@
 
 Ya que tenemos instalada la librería y los programas, podemos usar comandos
 para manipular la interfaz de GPIO. Por ejemplo, el comando `gpiodetect` muestra
 los diferentes interfaces de la GPIO:
 
-<script src="https://gist.github.com/ghsalazar/fbcd4a31c1b5c814e48b3797fbfcaa25.js"></script>
+~~~{.sh}
+gpiodetect
+~~~
 
 ![Resultado del comando
 `gpiodetect`](https://raw.githubusercontent.com/ghsalazar/dsp-images/main/images/raspberry-pi-gpiodetect.png){width=50%}
@@ -106,23 +107,25 @@ interfaces diferentes. La interfaz que nos interesa es `gpiochip0`. La siguiente
 operación será ver que líneas o pines tiene disponible la interfaz. Esto lo
 hacemos por medio de siguiente comando
 
-<script src="https://gist.github.com/ghsalazar/5933ae5e188931a312867a7673644932.js"></script>
+~~~{.sh}
+gpioinfo gpiochip0
+~~~
 
 ![Resultado del comando `gpioinfo`](https://github.com/ghsalazar/dsp-images/raw/main/images/raspberry-pi-gpioinfo.png){width=50%}
 
 Existen otros dos comandos importantes. El primero es `gpioset`. Este comando
 convierte una línea o pin en salida y le da un valor especificado. Por ejemplo,
 
-````
+~~~{.sh}
 gpioset gpiochip0 24=1
-````
+~~~
 
 le indica a la interfaz `gpiochip0` que convierta en salida a la línea 24 o
 `GPIO24` y le asigne un valor de 1. Por otro lado
 
-````
+~~~{.sh}
 gpioset gpiochip0 24=0
-````
+~~~
 
 hace lo mismo, pero le asigna a GPIO24 el valor de 0. El comando gpioset tiene
 más capacidades y se recomienda leer su
@@ -131,9 +134,9 @@ más capacidades y se recomienda leer su
 El otro comando es `gpioget`. Este comando convierte una línea o pin en entrada
 y lee el valor que tiene. Por ejemplo
 
-````
+~~~{.sh}
 gpioget gpiochip0 24
-````
+~~~
 
 le indica a la interfaz `gpiochip0` que convierta en entrada a la línea 24 o
 `GPIO24` y lea el valor que tiene.
@@ -142,7 +145,13 @@ A continuación, se tiene un ejemplo completo, aprovechando el comando gpioinfo.
 También se utiliza el comando [grep](https://es.wikipedia.org/wiki/Grep) para
 filtrar los resultados.
 
-<script src="https://gist.github.com/ghsalazar/ac43e8dcf913a8e539ae0999d1996e2c.js"></script>
+~~~{.sh}
+gpioinfo gpiochip0 | grep 24
+gpioset gpiochip0 24=0
+gpioinfo gpiochip0 | grep 24
+gpioget gpiochip0 24
+gpioinfo gpiochip0 | grep 24
+~~~
 
 ![Resultados de ejecutar `gpioset` y `gpioget` sobre
 GPIO24.](https://github.com/ghsalazar/dsp-images/raw/main/images/raspberry-pi-gpioset-gpioget.png){width=50%}
@@ -168,7 +177,7 @@ Una vez instalada la librería es posible desarrollar un programa en C,
 como el del ejemplo del siguiente listado.
 
 
-## gpiod
+## libgpiod
 
 <script src="http://gist-it.appspot.com/https://github.com/ghsalazar/dsp-raspberrypi/raw/main/examples/blink.c"></script>
 
