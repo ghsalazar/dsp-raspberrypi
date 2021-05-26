@@ -4,7 +4,7 @@ TARGETS = $(notdir $(patsubst %.mdw, %.html, $(wildcard $(SRC_DIR)/*.mdw)))
 all: $(TARGETS)
 
 %.html: %.md
-	pandoc $<	-o $@
+	pandoc -s --highlight-style espresso	$<	-o $@
 	
 %.md: $(SRC_DIR)/%.mdw
 	../etc/mdweb/src/mdweave $< > $@
