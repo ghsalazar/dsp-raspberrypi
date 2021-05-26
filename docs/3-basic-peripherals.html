@@ -163,13 +163,18 @@ code span.wa { color: #ffff00; font-weight: bold; } /* Warning */
 <p>Una vez instalada la librería es posible desarrollar un programa en C, como el del ejemplo del siguiente listado.</p>
 <h2 id="el-programa-blink">El programa <code>blink</code></h2>
 <script src="http://gist-it.appspot.com/https://github.com/ghsalazar/dsp-raspberrypi/raw/main/examples/blink.c"></script>
+<p>El código anterior puede parecer muy complicado para empezar a programar la GPIO de la Raspberry Pi. Para ello partiremos el código en su diferentes secciones. La primera sección consiste en simplemente un comentario.</p>
 <div class="sourceCode" id="cb9" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb9-1" title="1"><span class="co">/** Es un pequeño ejemplo de las funcionalidades del interfaz del GPIO  */</span></a>
 <a class="sourceLine" id="cb9-2" title="2"><span class="co">/** de la Raspberry Pi por medio de la librería libgpiod.               */</span></a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co">/**                                                                     */</span></a>
 <a class="sourceLine" id="cb9-4" title="4"><span class="co">/** Para compilar el programa, se debe utilizar el comando:             */</span></a>
 <a class="sourceLine" id="cb9-5" title="5"><span class="co">/**     gcc blink.c -lgpiod -o blink                                    */</span></a></code></pre></div>
-<div class="sourceCode" id="cb10" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb10-1" title="1"><span class="pp">#include </span><span class="im">&lt;gpiod.h&gt;</span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="pp">#include </span><span class="im">&lt;unistd.h&gt;</span></a></code></pre></div>
+<p>Lo más importante del comentario es la última línea, que indica como se debe compilar el ejemplo desde la línea de comando del Raspberry Pi OS. El compilador de C utilizado es el <a href="https://iie.fing.edu.uy/~vagonbar/gcc-make/gcc.htm"><code>gcc</code></a>. Este compilador es el más utilizado en el entorno de programación GNU/Linux. Este compilador tiene un conjunto muy amplio de opciones.</p>
+<p>En el comentario se manejan dos opciones. La primera opción (<code>-lgpiod</code>) indica que el programa se debe enlazar a la librería <code>libgpiod</code>. La segunda opción (<code>-o blink</code>) explicita cual nombre tendrá el programa final.</p>
+<p>A continuación, se tiene la inclusión de dos archivos de encabezado.</p>
+<div class="sourceCode" id="cb10" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb10-1" title="1"><span class="pp">#include </span><span class="im">&lt;unistd.h&gt;</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="pp">#include </span><span class="im">&lt;gpiod.h&gt;</span></a></code></pre></div>
+<p>Cuando incluimos archivos de encabezado, se anexan declaraciones de funciones. En el archivo <a href="https://en.wikipedia.org/wiki/Unistd.h"><code>unistd.h</code></a>, tenemos la declaración de la función <a href="https://man7.org/linux/man-pages/man3/usleep.3.html">usleep(3)</a>, que suspende la ejecución del programa por un intervalo medido en microsegundos (us).</p>
 <div class="sourceCode" id="cb11" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb11-1" title="1"><span class="dt">int</span> main()</a>
 <a class="sourceLine" id="cb11-2" title="2">{</a></code></pre></div>
 <div class="sourceCode" id="cb12" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb12-1" title="1">    <span class="kw">struct</span> gpiod_chip *chip;</a>
@@ -191,8 +196,9 @@ code span.wa { color: #ffff00; font-weight: bold; } /* Warning */
 <div class="sourceCode" id="cb19" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb19-1" title="1">    gpiod_line_set_value(led, <span class="dv">1</span>);</a>
 <a class="sourceLine" id="cb19-2" title="2">    gpiod_line_release(led);</a>
 <a class="sourceLine" id="cb19-3" title="3">    gpiod_line_release(button);</a>
-<a class="sourceLine" id="cb19-4" title="4">    <span class="cf">return</span> <span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb19-5" title="5">}</a></code></pre></div>
+<a class="sourceLine" id="cb19-4" title="4">    </a>
+<a class="sourceLine" id="cb19-5" title="5">    <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb19-6" title="6">}</a></code></pre></div>
 <h2 id="actividad-implementar-el-programa-blink">Actividad: Implementar el programa <code>blink</code></h2>
 <h2 id="referencias">Referencias</h2>
 </body>
