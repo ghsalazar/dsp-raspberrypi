@@ -1,6 +1,167 @@
 ---
-title: Basic peripherals
+title: Periféricos básicos de la Raspberry Pi
 ...
+
+# Introducción
+
+La tarjeta Raspberry Pi 3B+ dispone de un conector especial de 40 pines a una
+interfaz de [entrada--salida de propósito
+general](https://www.raspberrypi.org/documentation/usage/gpio/) (GPIO, por sus
+siglas en inglés). Esta interfaz permite controlar *hardware* externo al
+procesador de la Raspberry Pi y que podemos usar en programas de aplicación. En
+la figura 1, podemos ver el diagrama del conector utilizado por la GPIO.
+
+![**Figura 1**: Diagrama del conector de la interfaz de
+GPIO [@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/usage/gpio/images/GPIO-Pinout-Diagram-2.png){width=50%}
+
+Los pines de la interfaz de GPIO pueden cumplir una gran variedad de funciones
+[@RaspberryPiFoundation2020], como por ejemplo:
+
+* Entrada
+* Salida
+* [Modulación de ancho de
+  pulso](https://es.wikipedia.org/wiki/Modulaci%C3%B3n_por_ancho_de_pulsos)
+  (PWM, por sus siglas en inglés) por *software*.
+
+Además, algunos pines tienen funciones especiales; tales como:
+
+* PWM en *hardware*.
+* [Interfaz serie para
+  periféricos](https://es.wikipedia.org/wiki/Serial_Peripheral_Interface) (SPI,
+  por sus siglas en inglés) (SPI0 y SPI1).
+* [Circuito inter-integrado](https://es.wikipedia.org/wiki/I%C2%B2C) (I^2^C, por
+  sus siglas en inglés).
+* [Puerto serie](https://es.wikipedia.org/wiki/Puerto_serie)
+
+Existen diversos programas y librerías para acceder al GPIO de la Raspberry Pi;
+sin embargo, no todos son recomendados por el fabricante y otros se han vuelto
+obsoletos. Uno de los recomendados por el fabricante es
+[`gpiod`](https://kernel.googlesource.com/pub/scm/libs/libgpiod/libgpiod/+/refs/heads/master/README)
+[@Golaszewski2021].
+
+El sistema `gpiod` consiste en dos componentes. El primer componente es la
+librería `libgpiod`. La librería permite desarrollar programas en C y C++.
+
+El segundo componente son un conjunto de programas que permiten acceder a la
+interfaz de GPIO, así como modificar o consultar valores de los pines, desde la
+línea de comando.
+
+# Material, equipo y *software*.
+
+## Material
+
+* Resistencia de 220 Ohm.
+* Led rojo.
+* Cables *jump* macho--macho.
+
+## Equipo
+
+* Raspberry Pi 3B+ con conexión a Internet.
+* Computadora PC con conexión a Internet.
+
+## Software
+
+* Raspbian OS en tarjeta microSSD.
+
+# Actividad: Comando `pinout`
+
+* En la Raspberry Pi, se dispone del comando `pinout` que permite consultar la
+  disposición de las terminales del conector de la interfaz GPIO
+  [@RaspberryPiFoundation2020]
+
+  ![**Figura 3**: Resultado de la ejecución del comando `pinout`
+  [@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/usage/gpio/images/gpiozero-pinout.png){width=50%}
+
+# Actividad: Instalar `gpiod`
+
+<script src="https://gist.github.com/ghsalazar/16f05dc4b5b3fa8779e2453792d90491.js"></script>
+
+# Actividad: Interfaz en línea de comando
+
+* Ensamble el circuito de la figura.
+
+![**Figura**.](https://github.com/ghsalazar/dsp-images/raw/main/images/raspberry-pi-gpio-led.png)
+
+Para instalar los programas de `gpiod`, empezaremos por actualizar el sistema de
+paquetes del Raspeberry Pi OS y después realizar la instalación como tal,
+utilizando la línea de comando de la Raspberry. Podemos ver las instrucciones en
+el siguiente listado:
+
+<script src="https://gist.github.com/ghsalazar/4c0a808caf64df5a3efa01a4f463d479.js"></script>
+
+
+Ya que tenemos instalada la librería y los programas, podemos usar comandos
+para manipular la interfaz de GPIO. Por ejemplo, el comando `gpiodetect` muestra
+los diferentes interfaces de la GPIO:
+
+<script src="https://gist.github.com/ghsalazar/fbcd4a31c1b5c814e48b3797fbfcaa25.js"></script>
+
+![Resultado del comando
+`gpiodetect`](https://raw.githubusercontent.com/ghsalazar/dsp-images/main/images/raspberry-pi-gpiodetect.png){width=50%}
+
+Podemos ver el resultado del comando en la figura, donde se muestran tres
+interfaces diferentes. La interfaz que nos interesa es `gpiochip0`. La siguiente
+operación será ver que líneas o pines tiene disponible la interfaz. Esto lo
+hacemos por medio de siguiente comando
+
+<script src="https://gist.github.com/ghsalazar/5933ae5e188931a312867a7673644932.js"></script>
+
+![Resultado del comando `gpioinfo`](https://github.com/ghsalazar/dsp-images/raw/main/images/raspberry-pi-gpioinfo.png){width=50%}
+
+Existen otros dos comandos importantes. El primero es `gpioset`. Este comando
+convierte una línea o pin en salida y le da un valor especificado. Por ejemplo,
+
+````
+gpioset gpiochip0 24=1
+````
+
+le indica a la interfaz `gpiochip0` que convierta en salida a la línea 24 o
+`GPIO24` y le asigne un valor de 1. Por otro lado
+
+````
+gpioset gpiochip0 24=0
+````
+
+hace lo mismo, pero le asigna a GPIO24 el valor de 0. El comando gpioset tiene
+más capacidades y se recomienda leer su
+[manual](https://manpages.debian.org/experimental/gpiod/gpioset.1.en.html).
+
+El otro comando es `gpioget`. Este comando convierte una línea o pin en entrada
+y lee el valor que tiene. Por ejemplo
+
+````
+gpioget gpiochip0 24
+````
+
+le indica a la interfaz `gpiochip0` que convierta en entrada a la línea 24 o
+`GPIO24` y lea el valor que tiene.
+
+A continuación, se tiene un ejemplo completo, aprovechando el comando gpioinfo.
+También se utiliza el comando [grep](https://es.wikipedia.org/wiki/Grep) para
+filtrar los resultados.
+
+<script src="https://gist.github.com/ghsalazar/ac43e8dcf913a8e539ae0999d1996e2c.js"></script>
+
+![Resultados de ejecutar `gpioset` y `gpioget` sobre
+GPIO24.](https://github.com/ghsalazar/dsp-images/raw/main/images/raspberry-pi-gpioset-gpioget.png){width=50%}
+
+
+# Interfaz en C
+
+El uso de programas en el espacio de usuario puede permitir acelerar el
+desarrollo de una aplicación; sin embargo, este tipo de programas pueden
+alentar un proceso. Por lo tanto, conviene normalmente utilizar un lenguaje
+compilado para asegurar un mejor desempeño.
+
+Al instalar los programas en el espacio del usuario, se incluyó el paquete
+de la librería `libgpio`; pero para poder desarrollar un programa en C
+se necesita además los archivos de encabezado. Para ello instalaremos el paquete
+`libgpio-dev` por medio de las siguientes instrucciones
+
+<script src="https://gist.github.com/ghsalazar/88d2eff62bd5909328d5e27d1e1a74f3.js"></script>
+
+Una vez instalada la librería es posible desarrollar un programa en C,
+como el del ejemplo del siguiente listado.
 
 
 ## gpiod
