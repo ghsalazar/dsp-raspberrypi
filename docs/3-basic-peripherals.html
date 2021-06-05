@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Periféricos básicos de la Raspberry Pi</title>
+  <meta name="author" content="Gastón Hugo Salazar Silva" />
+  <title>Periféricos básicos de la Raspberry</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -76,7 +77,8 @@ code span.wa { color: #ffff00; font-weight: bold; } /* Warning */
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Periféricos básicos de la Raspberry Pi</h1>
+<h1 class="title">Periféricos básicos de la Raspberry</h1>
+<p class="author">Gastón Hugo Salazar Silva</p>
 </header>
 <h2 id="introducción">Introducción</h2>
 <p>La tarjeta Raspberry Pi 3B+ dispone de un conector especial de 40 pines a una interfaz de <a href="https://www.raspberrypi.org/documentation/usage/gpio/">entrada–salida de propósito general</a> (GPIO, por sus siglas en inglés). Esta interfaz permite controlar <em>hardware</em> externo al procesador de la Raspberry Pi y que podemos usar en programas de aplicación. En la figura 1, podemos ver el diagrama del conector utilizado por la GPIO.</p>
@@ -183,30 +185,44 @@ code span.wa { color: #ffff00; font-weight: bold; } /* Warning */
 <p>En el siguiente segmento de código tenemos la definición del primer objeto.</p>
 <div class="sourceCode" id="cb12" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb12-1" title="1">    <span class="kw">struct</span> gpiod_chip *chip;</a></code></pre></div>
 <p>En el lenguaje C, no tenemos objetos como tal; pero podemos agrupar una serie de atributos por medio de estructuras. La estructura de datos que vamos a utilizar es <code>gpiod_chip</code>. Dicha estructura está declarada en el archivo de encabezado <code>gpiod.h</code>. El objeto ocupará un espacio en la memoria y utilizamos el <a href="https://es.wikipedia.org/wiki/Puntero_(inform%C3%A1tica)">puntero</a> <code>chip</code> para almacenar la dirección de ese espacio de memoria.</p>
-<p>A continuación, produciremos el el objeto por medio de la siguiente línea.</p>
+<p>A continuación, produciremos el objeto por medio de la siguiente línea.</p>
 <div class="sourceCode" id="cb13" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb13-1" title="1">    chip = gpiod_chip_open_by_name(<span class="st">&quot;gpiochip0&quot;</span>);</a></code></pre></div>
 <p>La función <code>gpiod_chip_open_by_name</code> también se encuentra declarada en el archivo de encabezado <code>gpiod.h</code> y definida el la librería <code>libgpiod</code>. La función toma un espacio de memoria, le asigna valores determinados y regresa la dirección del espacio de memoria.</p>
+<p>A continuación, realizaremos la declaración para dos punteros más.</p>
 <div class="sourceCode" id="cb14" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb14-1" title="1">    <span class="kw">struct</span> gpiod_line *led;</a>
 <a class="sourceLine" id="cb14-2" title="2">    <span class="kw">struct</span> gpiod_line *button;</a></code></pre></div>
+<p>El puntero <code>led</code> se utilizará para localizar el objeto que se utilizará para controlar un led. Por otro lado, <code>button</code> apuntará al objeto que estará relacionado con la entrada de un botón.</p>
+<p>Luego, se inicializarán ambos objetos.</p>
 <div class="sourceCode" id="cb15" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb15-1" title="1">    led    = gpiod_chip_get_line(chip, <span class="dv">24</span>);</a>
 <a class="sourceLine" id="cb15-2" title="2">    button = gpiod_chip_get_line(chip, <span class="dv">6</span>);</a></code></pre></div>
+<p>La función <code>gpiod_chip_get_line</code> sirve para asignar la memoria de ambos objetos y regresa la dirección de memoria de cada objeto. El objeto en si está relacionado con el pin físico de la GPIO que se desea utilizar. En el caso del led, se utilizará el pin 24. Por otro lado, al botón se le asignará el pin 6.</p>
+<p>Como <code>gpiod</code> esta embebido dentro del sistema operativo Linux, no se puede acceder directamente al <em>hardware</em>. Hay que solicitar ese acceso. Recordemos que una de las finciones de un sistema operativo es administrar el uso de recursos por programas de aplicación.</p>
 <div class="sourceCode" id="cb16" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb16-1" title="1">    gpiod_line_request_output(led, <span class="st">&quot;myLED&quot;</span>, <span class="dv">0</span>);</a>
 <a class="sourceLine" id="cb16-2" title="2">    gpiod_line_request_input(button, <span class="st">&quot;button&quot;</span>);</a></code></pre></div>
-<div class="sourceCode" id="cb17" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb17-1" title="1">    <span class="dt">int</span> state = <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb17-2" title="2">    <span class="dt">int</span> input = <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb17-3" title="3">    <span class="cf">while</span> (input == <span class="dv">1</span>) {</a></code></pre></div>
-<div class="sourceCode" id="cb18" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb18-1" title="1">        state = state ^ <span class="dv">1</span>;</a></code></pre></div>
-<div class="sourceCode" id="cb19" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb19-1" title="1">        gpiod_line_set_value(led, state);</a>
-<a class="sourceLine" id="cb19-2" title="2">        input = gpiod_line_get_value(button);</a></code></pre></div>
-<div class="sourceCode" id="cb20" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb20-1" title="1">        usleep(<span class="dv">500000</span>);</a>
-<a class="sourceLine" id="cb20-2" title="2">    }</a></code></pre></div>
-<div class="sourceCode" id="cb21" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb21-1" title="1">    gpiod_line_set_value(led, <span class="dv">1</span>);</a>
-<a class="sourceLine" id="cb21-2" title="2">    gpiod_line_release(led);</a>
-<a class="sourceLine" id="cb21-3" title="3">    gpiod_line_release(button);</a>
-<a class="sourceLine" id="cb21-4" title="4"></a>
-<a class="sourceLine" id="cb21-5" title="5">    <span class="cf">return</span> <span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb21-6" title="6">}</a></code></pre></div>
-<h2 id="actividad-implementar-el-programa-blink">Actividad: Implementar el programa <code>blink</code></h2>
+<p>El programa se diseño fundamentalmente como un <a href="https://en.wikipedia.org/wiki/Timed_automaton">autómata temporizado</a>. El automata tiene dos estados posible y conmuta de uno a otro después que pasó un tiempo.</p>
+<div class="sourceCode" id="cb17" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb17-1" title="1">    <span class="dt">int</span> state = <span class="dv">1</span>;</a></code></pre></div>
+<p>Emplearemos otra variable, <code>input</code>, para almacenar el estado del interruptor. Cuando el interruptor es presionado, se envía una señal de 0. Cuando no está presionado, da 1.</p>
+<div class="sourceCode" id="cb18" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb18-1" title="1">    <span class="dt">int</span> input = <span class="dv">1</span>;</a></code></pre></div>
+<p>Todo lo anterior fue para configurar el autómata. Equivaldría a lo que se hace en la función <code>setup</code> del entorno Arduino. A continuación viene el ciclo principal (<em>main loop</em>). De este ciclo se puede salir cuando se presiona el interruptor.</p>
+<div class="sourceCode" id="cb19" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb19-1" title="1">    <span class="cf">while</span> (input == <span class="dv">1</span>) {</a></code></pre></div>
+<p>Como ya se mencionó, el programa opera como un autómata temporizado. El cambio de estado se da por medio de una operación XOR, que usa para <a href="https://es.wikipedia.org/wiki/Operador_a_nivel_de_bits#Invirtiendo_bits_selectivamente">invertir el bit menos significativo</a> de la variable. Es decir si la variable <code>state</code> tiene un valor de 1, pasa a 0, y viceversa.</p>
+<div class="sourceCode" id="cb20" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb20-1" title="1">        state = state ^ <span class="dv">1</span>;</a></code></pre></div>
+<p>La salida del programa es el led. Utilizamos la variable <code>state</code> para encender o apagar el led. Para ello nos ayudamos de la función <code>gpiod_line_set_value</code>.</p>
+<div class="sourceCode" id="cb21" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb21-1" title="1">        gpiod_line_set_value(led, state);</a></code></pre></div>
+<p>Por otro lado, necesitamos leer el valor del pin que esta conectado al botón. Esto lo hacemos por medio de la función <code>gpiod_line_get_value</code>.</p>
+<div class="sourceCode" id="cb22" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb22-1" title="1">        input = gpiod_line_get_value(button);</a></code></pre></div>
+<p>La última instrucción del ciclo es un temporizador que inactiva el proceso por un tiempo de <span class="math inline">500000<em>μ</em>s</span> o equivalentemente 0.5 s. La función usada es <code>usleep(3)</code>.</p>
+<div class="sourceCode" id="cb23" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb23-1" title="1">        usleep(<span class="dv">500000</span>);</a>
+<a class="sourceLine" id="cb23-2" title="2">    }</a></code></pre></div>
+<p>Si presionamos el botón, el ciclo se rompe y el programa empieza a preparar lo necesario para finalizar su ejecución. El primer paso es apagar el led.</p>
+<div class="sourceCode" id="cb24" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb24-1" title="1">    gpiod_line_set_value(led, <span class="dv">1</span>);</a></code></pre></div>
+<p>Así como solicitamos el uso de algunos de los pines de la GPIO, tenemos que avisarle al sistema operativo que el programa ya no necesita esos pines. para ello se utiliza la función <code>gpiod_line_release</code>.</p>
+<div class="sourceCode" id="cb25" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb25-1" title="1">    gpiod_line_release(led);</a>
+<a class="sourceLine" id="cb25-2" title="2">    gpiod_line_release(button);</a></code></pre></div>
+<p>Finalmente función <code>main</code> termina.</p>
+<div class="sourceCode" id="cb26" name="blink.c" data-caption="blink.c" data-numbers="left" data-frame="leftline"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb26-1" title="1">    <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb26-2" title="2">}</a></code></pre></div>
+<h2 id="conclusiones">Conclusiones</h2>
 <h2 id="referencias">Referencias</h2>
 </body>
 </html>

@@ -1,5 +1,6 @@
 ---
-title: Periféricos básicos de la Raspberry Pi
+title:  Periféricos básicos de la Raspberry 
+author: Gastón Hugo Salazar Silva
 ...
 
 ## Introducción
@@ -247,7 +248,7 @@ es `gpiod_chip`. Dicha estructura está declarada en el archivo de encabezado
 [puntero](https://es.wikipedia.org/wiki/Puntero_(inform%C3%A1tica)) `chip` para
 almacenar la dirección de ese espacio de memoria.
 
-A continuación, produciremos el el objeto por medio de la siguiente línea.
+A continuación, produciremos el objeto por medio de la siguiente línea.
 
 <<blink.c>>=
     chip = gpiod_chip_open_by_name("gpiochip0");
@@ -284,26 +285,70 @@ y regresa la dirección de memoria de cada objeto. El objeto en si está
 relacionado con el pin físico de la GPIO que se desea utilizar. En el caso del
 led, se utilizará el pin 24. Por otro lado, al botón se le asignará el pin 6.
 
+Como `gpiod` esta embebido dentro del sistema operativo Linux, no se puede
+acceder directamente al *hardware*. Hay que solicitar ese acceso. Recordemos que
+una de las finciones de un sistema operativo es administrar el uso de recursos
+por programas de aplicación.
+
 <<blink.c>>=
     gpiod_line_request_output(led, "myLED", 0);
     gpiod_line_request_input(button, "button");
 
 @
 
+El programa se diseño fundamentalmente como un [autómata
+temporizado](https://en.wikipedia.org/wiki/Timed_automaton). El automata tiene
+dos estados posible y conmuta de uno a otro después que pasó un tiempo. 
+
 <<blink.c>>=
     int state = 1;
+@
+
+Emplearemos otra variable, `input`, para almacenar el estado del interruptor.
+Cuando el interruptor es presionado, se envía una señal de 0. Cuando no está
+presionado, da 1.
+
+<<blink.c>>=
     int input = 1;
+@
+
+Todo lo anterior fue para configurar el autómata. Equivaldría a lo que se hace
+en la función `setup` del entorno Arduino. A continuación viene el ciclo
+principal (*main loop*). De este ciclo se puede salir cuando se presiona el
+interruptor.
+
+<<blink.c>>=
     while (input == 1) {
 @
+
+Como ya se mencionó, el programa opera como un autómata temporizado. El cambio
+de estado se da por medio de una operación XOR, que usa para [invertir el bit
+menos
+significativo](https://es.wikipedia.org/wiki/Operador_a_nivel_de_bits#Invirtiendo_bits_selectivamente)
+de la variable. Es decir si la variable `state` tiene un valor de 1, pasa a 0, y
+viceversa.
 
 <<blink.c>>=
         state = state ^ 1;
 @
 
+La salida del programa es el led. Utilizamos la variable `state` para encender o
+apagar el led. Para ello nos ayudamos de la función `gpiod_line_set_value`.
+
 <<blink.c>>=
         gpiod_line_set_value(led, state);
+@
+
+Por otro lado, necesitamos leer el valor del pin que esta conectado al botón.
+Esto lo hacemos por medio de la función `gpiod_line_get_value`.
+
+<<blink.c>>=
         input = gpiod_line_get_value(button);
 @
+
+La última instrucción del ciclo es un temporizador que inactiva el proceso por
+un tiempo de $500 000 \mu\textrm{s}$ o equivalentemente 0.5 s. La función usada
+es `usleep(3)`.
 
 <<blink.c>>=
         usleep(500000);
@@ -311,15 +356,29 @@ led, se utilizará el pin 24. Por otro lado, al botón se le asignará el pin 6.
 
 @
 
+Si presionamos el botón, el ciclo se rompe y el programa empieza a preparar lo
+necesario para finalizar su ejecución. El primer paso es apagar el led. 
+
 <<blink.c>>=
     gpiod_line_set_value(led, 1);
+@
+
+Así como solicitamos el uso de algunos de los pines de la GPIO, tenemos que
+avisarle al sistema operativo que el programa ya no necesita esos pines. para
+ello se utiliza la función `gpiod_line_release`.
+
+<<blink.c>>=
     gpiod_line_release(led);
     gpiod_line_release(button);
+@
 
+Finalmente función `main` termina.
+
+<<blink.c>>=
     return 0;
 }
 @
 
-## Actividad: Implementar el programa `blink`
+## Conclusiones
 
 ## Referencias
