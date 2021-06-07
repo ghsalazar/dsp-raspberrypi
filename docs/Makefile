@@ -1,13 +1,13 @@
 SRC_DIR = ../src
-TARGETS = $(notdir $(patsubst %.mdw, %.html, $(wildcard $(SRC_DIR)/*.mdw)))
+TARGETS = $(notdir $(patsubst %.md, %.html, $(wildcard $(SRC_DIR)/*.md)))
+
+HTMLFLAGS = --highlight-style espresso 
 
 all: $(TARGETS)
+	echo $(TARGETS)
 
-%.html: %.md
-	pandoc -s --highlight-style espresso	$<	-o $@
-	
-%.md: $(SRC_DIR)/%.mdw
-	../etc/mdweb/src/mdweave $< > $@
+%.html: $(SRC_DIR)/%.md
+	sh ../etc/mdweb/src/mdweave $< 	|	pandoc $(HTMLFLAGS)	$<	-o $@
 
 .PHONNY: clean distclean
 
