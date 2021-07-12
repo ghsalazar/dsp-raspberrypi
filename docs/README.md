@@ -45,7 +45,7 @@ Broadcom BCM2837.
         * Lista de instrucciones.
         * Llamada a funciones.
         * Consideraciones de memoria.
-    * DSP/BIOS.
+    * Sistema operativo Linux
     * Lenguaje C/C++
         * Depuración de código
 * Periféricos Básicos del SoC Broadcom BCM2837
