@@ -1,9 +1,23 @@
 # Procesamiento de señales digitales con la Raspberry Pi 
 
-Una de las aplicaciones más importantes de los sistemas embebidos es el procesamiento digital de señales.
+Una de las aplicaciones más importantes de los sistemas embebidos es el
+procesamiento digital de señales.
+
+Si bien se disponen de procesadores digitales de señales, usualmente no se
+dispone de tarjetas lo suficientemenete económicas o accesibles para poder
+experimentar con ellas. Por eso se escogió el [sistema en
+chip](https://es.wikipedia.org/wiki/System_on_a_chip) [Broadcom
+BCM2837](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2837/README.md).
+Este sistema en chip (SoC, por sus siglas en inglés) tiene varias
+características que son adecuadas para el procesamiento digital de señales. Una
+tarjeta muy accesible que cuenta con este SoC es la Raspberry Pi 3A+.
+
 ## Contenido
 
-A continuación se muestra un índice propuesto del contenido. Por el momento, este índice refleja realidad el programa propuesto por la UPIITA-IPN para el procesador uitilizado en el curso. Sin embargo, eventualmente convergerá al SoC Broadcom BCM2837.
+A continuación se muestra un índice propuesto del contenido. Por el momento,
+este índice refleja realidad el programa propuesto por la UPIITA-IPN para el
+procesador uitilizado en el curso. Sin embargo, eventualmente convergerá al SoC
+Broadcom BCM2837.
 
 * Primeros pasos con el SoC Broadcom 2837 (¿blink?)
     * Arquitectura
