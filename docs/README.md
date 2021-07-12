@@ -13,6 +13,12 @@ características que son adecuadas para el procesamiento digital de señales. Un
 tarjeta muy accesible que cuenta con este SoC es la tarjeta [Raspberry Pi
 3A+](https://www.raspberrypi.org/products/raspberry-pi-3-model-a-plus/).
 
+Para seguir el contenido del curso, se asume que ya se tiene conocimiento básico
+de arquitectura de procesadores y lenguaje ensamblador, aunque sea en otro
+procesador, como el ATmega328p. Un curso introductorio de ensamblador para el
+SoC BCM2837 lo puede encontrar
+[aquí](https://thinkingeek.com/arm-assembler-raspberry-pi/). 
+
 <a href="https://twitter.com/gaston_salazar?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @gaston_salazar</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 ## Contenido
 
@@ -21,16 +27,16 @@ este índice refleja en realidad el programa propuesto por la UPIITA-IPN para el
 procesador uitilizado en el curso. Sin embargo, eventualmente convergerá al SoC
 Broadcom BCM2837.
 
-* Primeros pasos con el SoC Broadcom 2837 (¿blink?)
-    * Arquitectura
-        * Unidades funcionales
-        * Registros
-        * Modos de direccionamiento (Directo, indirecto, circular)
+* Arquitectura del SoC Broadcom 2837 (¿blink?)
+    * Unidades funcionales
+    * Registros
+    * Modos de direccionamiento (Directo, indirecto, circular)
     * Procesamiento en paralelo
         * Procesamiento de Suma de Multiplicaciones Aditivas (MAC's )
     * Uso y mapeo de memoria interna/externa
         * Manejo de memoria Flash
         * Vector de interrupciones
+    * Actividad: Primeros pasos con el SoC Broadcom 2837 (¿blink?)
 * Programación del SoC Broadcom BCM2837
     * Introducción al IDE del DSP
         * Opciones de compilación
