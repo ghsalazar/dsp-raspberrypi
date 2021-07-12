@@ -1,7 +1,9 @@
-Este es el sitio del proyecto dsp-raspberrypi. El objetivo del proyecto es 
+# Procesamiento de señales digitales con la Raspberry Pi 
+
+Una de las aplicaciones más importantes de los sistemas embebidos es el procesamiento digital de señales.
 ## Contenido
 
-La propuesta del contenido es la siguiente:
+A continuación se muestra un índice propuesto del contenido. Por el momento, este índice refleja realidad el programa propuesto por la UPIITA-IPN para el procesador uitilizado en el curso. Sin embargo, eventualmente convergerá al SoC Broadcom BCM2837.
 
 * Primeros pasos con el SoC Broadcom 2837 (¿blink?)
     * Arquitectura
