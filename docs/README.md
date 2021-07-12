@@ -17,7 +17,7 @@ tarjeta muy accesible que cuenta con este SoC es la tarjeta [Raspberry Pi
 ## Contenido
 
 A continuación se muestra un índice propuesto del contenido. Por el momento,
-este índice refleja realidad el programa propuesto por la UPIITA-IPN para el
+este índice refleja en realidad el programa propuesto por la UPIITA-IPN para el
 procesador uitilizado en el curso. Sin embargo, eventualmente convergerá al SoC
 Broadcom BCM2837.
 
