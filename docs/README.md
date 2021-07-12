@@ -30,7 +30,7 @@ Broadcom BCM2837.
     * Uso y mapeo de memoria interna/externa
         * Manejo de memoria Flash
         * Vector de interrupciones
-* Llamadas al sistema operativo Linux con el SoC Broadcom BCM2837
+* Programación del SoC Broadcom BCM2837
     * Introducción al IDE del DSP
         * Opciones de compilación
         * Opciones de ligado.
