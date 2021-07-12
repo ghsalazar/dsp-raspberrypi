@@ -10,7 +10,8 @@ chip](https://es.wikipedia.org/wiki/System_on_a_chip) [Broadcom
 BCM2837](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2837/README.md).
 Este sistema en chip (SoC, por sus siglas en inglés) tiene varias
 características que son adecuadas para el procesamiento digital de señales. Una
-tarjeta muy accesible que cuenta con este SoC es la Raspberry Pi 3A+.
+tarjeta muy accesible que cuenta con este SoC es la tarjeta [Raspberry Pi
+3A+](https://www.raspberrypi.org/products/raspberry-pi-3-model-a-plus/).
 
 ## Contenido
 
@@ -58,3 +59,9 @@ Broadcom BCM2837.
     * IIR
     * Adaptable.
 * Implementacion de una RNA con el SoC Broadcom BCM2837
+
+## Colofón
+
+La estructura que se seguirá para el curso será similar a la propuesta de
+[Sergey Matyukevich para su curso
+raspberry-pi-os](https://s-matyukevich.github.io/raspberry-pi-os/).
