@@ -13,6 +13,7 @@ características que son adecuadas para el procesamiento digital de señales. Un
 tarjeta muy accesible que cuenta con este SoC es la tarjeta [Raspberry Pi
 3A+](https://www.raspberrypi.org/products/raspberry-pi-3-model-a-plus/).
 
+<a href="https://twitter.com/gaston_salazar?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @gaston_salazar</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 ## Contenido
 
 A continuación se muestra un índice propuesto del contenido. Por el momento,
