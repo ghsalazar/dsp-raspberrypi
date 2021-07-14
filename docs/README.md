@@ -1,4 +1,7 @@
-# Procesamiento de señales digitales con la Raspberry Pi 
+---
+layout: page
+title: Procesamiento de señales digitales con la Raspberry Pi
+...
 
 Una de las aplicaciones más importantes de los sistemas embebidos es el
 procesamiento digital de señales.
@@ -19,7 +22,7 @@ procesador, como el ATmega328p. Un curso introductorio de ensamblador para el
 SoC BCM2837 lo puede encontrar
 [aquí](https://thinkingeek.com/arm-assembler-raspberry-pi/). 
 
-<a href="https://twitter.com/gaston_salazar?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @gaston_salazar</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 ## Contenido
 
 A continuación se muestra un índice propuesto del contenido. Por el momento,
