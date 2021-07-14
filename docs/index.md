@@ -17,8 +17,8 @@ tarjeta muy accesible que cuenta con este SoC es la tarjeta [Raspberry Pi
 
 Para seguir el contenido del curso, se asume que ya se tiene conocimiento básico
 de arquitectura de procesadores y lenguaje ensamblador, aunque sea en otro
-procesador, como el ATmega328p. Un curso introductorio de ensamblador para el
-SoC BCM2837 lo puede encontrar
+procesador, como el [ATmega328p](https://arduino.cl/arduino-uno/). Un curso
+introductorio de ensamblador para el SoC BCM2837 lo puede encontrar
 [aquí](https://thinkingeek.com/arm-assembler-raspberry-pi/). 
 
 
