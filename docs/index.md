@@ -2,6 +2,8 @@
 layout: page
 ...
 
+## Procesamiento de señales digitales con la Raspberry Pi
+
 Una de las aplicaciones más importantes de los sistemas embebidos es el
 procesamiento digital de señales.
 
