@@ -1,5 +1,5 @@
 ---
-layout:page
+layout: page
 ...
 
 Una de las aplicaciones más importantes de los sistemas embebidos es el
