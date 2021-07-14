@@ -1,4 +1,4 @@
-theme: jekyll-theme-minimal
+theme: minima #jekyll-theme-minimal
 
 author: Gastón H. Salazar-Silva
 email: gaston_salazar@yahoo.com
