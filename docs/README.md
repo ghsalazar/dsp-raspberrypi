@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Procesamiento de señales digitales con la Raspberry Pi
 ...
 
