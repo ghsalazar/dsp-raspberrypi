@@ -39,18 +39,49 @@ El tercer mapa es el espacio de [memoria
 virtual](https://es.wikipedia.org/wiki/Memoria_virtual), que es el espacio de
 memoria que puede ver el usuario.
 
-## Memoria del procesador VideoCore IV
+## Memoria física
+
+* Es importante notar que la memoria del SoC está conectada al procesador
+  VideoCore IV.
+* El procesador ARM Cortex-A53 se monta sobre esa memoria, vía la [unidad de
+  gestión de
+  memoria](https://es.wikipedia.org/wiki/Unidad_de_gesti%C3%B3n_de_memoria)
+  (MMU, por sus siglas en inglés). 
+* Es importante notar que el SoC BCM2837 se basa en el BCM2835, pero la
+  [dirección base para los periféricos es
+  0x3F000000](https://github.com/enricorov/Pinterrupt), mientras que en el
+  BCM2835 es 0x7E000000.
 
 
-## Direccionamiento físico
+## Unidades de gestión de memoria
 
+* El BCM2837 tiene dos unidades de gestión de memoria
+* [unidad de gestión de
+  memoria](https://es.wikipedia.org/wiki/Unidad_de_gesti%C3%B3n_de_memoria)
+  (MMU, por sus siglas en inglés).
 
-### MMU
+## Direccionamiento físico en el procesador ARM Cortex-A53
 
 
 ## Memoria virtual
 
 https://s-matyukevich.github.io/raspberry-pi-os/docs/lesson06/rpi-os.html
+
+
+## Conclusiones
+
+* Se tienen dos mapas de memoria y pueden llegar a ser tres:
+  * El mapa de memoria física, la cual está asociada al procesador VideoCore IV.
+  * El mapa de direccionamiento del procesador ARM Cortex-A53.
+  * El mapa de memoria virtual, en el caso de usar el sistema operativo Linux.
+* Esto produce que un mismo espacio de memoria pueda tener tres diferentes
+  direcciones; por ejemplo para el caso de la dirección base de los periféricos
+  se tienen:
+
+|    | Memoria física | Direccionamiento en el ARM Cortex-A53 | Memoria virtual |
+|:--:|:--------------:|:-------------------------------------:|:---------------:|
+| Base de memoria SDRAM | 0xC0000000 | 0x00000000 | 0xC0000000 |
+| Base de periféricos   | 0x3F000000 | 0x20000000 | 0xF2000000 |
 
 ## Para saber más
 
