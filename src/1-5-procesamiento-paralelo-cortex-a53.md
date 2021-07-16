@@ -55,6 +55,8 @@ núcleos (ver figura siguiente).
 |:-----:|
 | Figura: Arquitectura del Arm Cortex-A53. Fuente: manuti (2016). Cortex-A53. Raspberry para torpes. [En línea, recuperado el 2 de octubre de 2020]. [https://raspberryparatorpes.net/glossary/cortex-a53/]. |
 
+![Procesador Arm Cortex-A53](https://developer.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A53.png?revision=1903cd57-7149-435d-ab9c-07946ddf0ef3&la=en&hash=FA7D6F6FD6091A432FB55CF45CA4E5B736EE1DC5)
+
 En el caso de la Raspberry Pi, que utiliza el procesador Arm Cortex-A53, se
 tienen 4 núcleos.
 
