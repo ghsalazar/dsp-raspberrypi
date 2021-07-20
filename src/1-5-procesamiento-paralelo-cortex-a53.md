@@ -5,6 +5,10 @@ layout: post
 categories: dsp, embedded systems
 ...
 
+https://bob.cs.sonoma.edu/IntroCompOrg-RPi/sec-gpio-pins.html
+        .cpu    cortex-a53
+        .fpu    neon-fp-armv8
+
 Recordemos inicialmente que los procesadores digitales de señales se
 especializan en transformar señales discretas. Un ejemplo típico es la
 implementación del filtro de respuesta finita al impulso (FIR), que se puede
