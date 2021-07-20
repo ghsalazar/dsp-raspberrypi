@@ -121,9 +121,11 @@ loop:
 
 ## Ensamblado y enlazado del programa
 
+~~~
 arm-none-eabi-as -g -o dsp-blink.o dsp-blink.s
 arm-none-eabi-ld dsp-blink.o -o dsp-blink.elf
 arm-none-eabi-objcopy dsp-blink.elf -O binary kernel7.img
+~~~
 
 ## Ejecución del programa
 
