@@ -78,10 +78,10 @@ https://s-matyukevich.github.io/raspberry-pi-os/docs/lesson06/rpi-os.html
   direcciones; por ejemplo para el caso de la dirección base de los periféricos
   se tienen:
 
-|    | Memoria física | Direccionamiento en el ARM Cortex-A53 | Memoria virtual |
+|    | Bus VideoCore | Dirección física en el ARM Cortex-A53 | Memoria virtual |
 |:--:|:--------------:|:-------------------------------------:|:---------------:|
 | Base de memoria SDRAM | 0xC0000000 | 0x00000000 | 0xC0000000 |
-| Base de periféricos   | 0x3F000000 | 0x20000000 | 0xF2000000 |
+| Base de periféricos   | 0x7E000000 | 0x3F000000 | 0xF2000000 |
 
 ## Para saber más
 
