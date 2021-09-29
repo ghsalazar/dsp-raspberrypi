@@ -1,0 +1,12 @@
+theme: minima #jekyll-theme-minimal
+
+title: Procesamiento Digital de Señales con la Raspberry Pi
+author: Gastón H. Salazar-Silva
+email: ghsalazar@ipn.mx
+
+twitter_username: gaston_salazar
+github_username:  ghsalazar
+linkedin_username: ghsalazar
+
+header_pages:
+ - about.md
