@@ -13,7 +13,7 @@ procesador de la Raspberry Pi y que podemos usar en programas de aplicación. En
 la figura 1, podemos ver el diagrama del conector utilizado por la GPIO.
 
 ![**Figura 1**: Diagrama del conector de la interfaz de
-GPIO [@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/usage/gpio/images/GPIO-Pinout-Diagram-2.png){width=50%}
+GPIO [@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/computers/images/GPIO-Pinout-Diagram-2.png){width=50%}
 
 Los pines de la interfaz de GPIO pueden cumplir una gran variedad de funciones
 [@RaspberryPiFoundation2020], como por ejemplo:
@@ -72,7 +72,7 @@ conector de la interfaz GPIO, por medio del comando `pinout`
 [@RaspberryPiFoundation2020].
     
 ![**Figura 3**: Resultado de la ejecución del comando `pinout`
-[@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/usage/gpio/images/gpiozero-pinout.png){width=50%}
+[@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/computers/images/gpiozero-pinout.png){width=50%}
 
 
 ## Actividad: Instalar `gpiod`
