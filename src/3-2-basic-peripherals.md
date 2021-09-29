@@ -1,6 +1,7 @@
 ---
 title:  Periféricos básicos de la Raspberry 
 author: Gastón Hugo Salazar Silva
+layout: post
 ...
 
 ## Introducción
