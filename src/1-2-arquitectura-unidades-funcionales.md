@@ -10,8 +10,6 @@ category: dsp, arquitectura
 
 ## Cortex-A53
 
-Usar procesamiento-paralelo-cortex-a53.md
-
 ![Procesador Arm Cortex-A53](https://developer.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A53.png?revision=1903cd57-7149-435d-ab9c-07946ddf0ef3&la=en&hash=FA7D6F6FD6091A432FB55CF45CA4E5B736EE1DC5)
 
 
@@ -89,3 +87,5 @@ https://www.radishlogic.com/raspberry-pi/sd-card-partitions-installing-raspbian-
 https://www.raspberrypi.org/forums/viewtopic.php?f=2&t=3042
 
 https://www.codedivine.org/2014/03/03/broadcom-videocore-iv-architecture-overview/
+
+https://youtu.be/eZd0IYJ7J40
