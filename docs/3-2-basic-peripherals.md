@@ -14,10 +14,9 @@ procesador de la Raspberry Pi y que podemos usar en programas de aplicación. En
 la figura 1, podemos ver el diagrama del conector utilizado por la GPIO.
 
 ![**Figura 1**: Diagrama del conector de la interfaz de
-GPIO [@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/computers/images/GPIO-Pinout-Diagram-2.png)
+GPIO](https://www.raspberrypi.org/documentation/computers/images/GPIO-Pinout-Diagram-2.png)
 
-Los pines de la interfaz de GPIO pueden cumplir una gran variedad de funciones
-[@RaspberryPiFoundation2020], como por ejemplo:
+Los pines de la interfaz de GPIO pueden cumplir una gran variedad de funciones, como por ejemplo:
 
 * Entrada
 * Salida
@@ -38,8 +37,7 @@ Además, algunos pines tienen funciones especiales; tales como:
 Existen varios programas y librerías para utilizar la GPIO de la Raspberry Pi;
 sin embargo, no todos son recomendados por el fabricante y otros se han vuelto
 obsoletos. Uno de los recomendados por el fabricante es
-[`gpiod`](https://kernel.googlesource.com/pub/scm/libs/libgpiod/libgpiod/+/refs/heads/master/README)
-[@Golaszewski2021].
+[`gpiod`](https://kernel.googlesource.com/pub/scm/libs/libgpiod/libgpiod/+/refs/heads/master/README).
 
 El sistema `gpiod` consiste en dos componentes. El primer componente es la
 librería `libgpiod`. La librería permite desarrollar programas en C y C++.
@@ -69,11 +67,9 @@ línea de comando.
 ## Actividad: Comando `pinout`
 
 En la Raspberry Pi, podemos consultar la disposición de las terminales del
-conector de la interfaz GPIO, por medio del comando `pinout`
-[@RaspberryPiFoundation2020].
+conector de la interfaz GPIO, por medio del comando `pinout`.
     
-![**Figura 3**: Resultado de la ejecución del comando `pinout`
-[@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/computers/images/gpiozero-pinout.png)
+![**Figura 3**: Resultado de la ejecución del comando `pinout`](https://www.raspberrypi.org/documentation/computers/images/gpiozero-pinout.png)
 
 
 ## Actividad: Instalar `gpiod`
@@ -83,7 +79,7 @@ paquetes del Raspeberry Pi OS y después realizar la instalación como tal,
 utilizando la línea de comando de la Raspberry. Podemos ver las instrucciones en
 el siguiente listado:
 
-~~~{.sh name=raspberry-install-gpiod.sh caption=raspberry-install-gpiod.sh numbers=left frame=leftline}
+~~~
 sudo apt update
 sudo apt -y install gpiod
 ~~~
@@ -94,19 +90,19 @@ Ya que tenemos instalada la librería y los programas, podemos usar comandos
 para manipular la interfaz de GPIO. Por ejemplo, el comando `gpiodetect` muestra
 los diferentes interfaces de la GPIO:
 
-~~~{.sh}
+~~~
 gpiodetect
 ~~~
 
 ![Resultado del comando
-`gpiodetect`](https://raw.githubusercontent.com/ghsalazar/dsp-images/main/images/raspberry-pi-gpiodetect.png){width=50%}
+`gpiodetect`](https://raw.githubusercontent.com/ghsalazar/dsp-images/main/images/raspberry-pi-gpiodetect.png)
 
 Podemos ver el resultado del comando en la figura, donde se muestran tres
 interfaces diferentes. La interfaz que nos interesa es `gpiochip0`. La siguiente
 operación será ver que líneas o pines tiene disponible la interfaz. Esto lo
 hacemos por medio de siguiente comando
 
-~~~{.sh}
+~~~
 gpioinfo gpiochip0
 ~~~
 
@@ -120,14 +116,14 @@ gpioinfo gpiochip0
 Existen otros dos comandos importantes. El primero es `gpioset`. Este comando
 convierte una línea o pin en salida y le da un valor especificado. Por ejemplo,
 
-~~~{.sh}
+~~~
 gpioset gpiochip0 24=1
 ~~~
 
 le indica a la interfaz `gpiochip0` que convierta en salida a la línea 24 o
 `GPIO24` y le asigne un valor de 1. Por otro lado
 
-~~~{.sh}
+~~~
 gpioset gpiochip0 24=0
 ~~~
 
@@ -138,7 +134,7 @@ más capacidades y se recomienda leer su
 El otro comando es `gpioget`. Este comando convierte una línea o pin en entrada
 y lee el valor que tiene. Por ejemplo
 
-~~~{.sh}
+~~~
 gpioget gpiochip0 24
 ~~~
 
@@ -149,7 +145,7 @@ A continuación, se tiene un ejemplo completo, aprovechando el comando gpioinfo.
 También se utiliza el comando [grep](https://es.wikipedia.org/wiki/Grep) para
 filtrar los resultados.
 
-~~~{.sh}
+~~~
 gpioinfo gpiochip0 | grep 24
 gpioset gpiochip0 24=0
 gpioinfo gpiochip0 | grep 24
@@ -173,7 +169,7 @@ de la librería `libgpio`; pero para poder desarrollar un programa en C
 se necesita además los archivos de encabezado. Para ello instalaremos el paquete
 `libgpio-dev` por medio de las siguientes instrucciones
 
-~~~{.sh name=raspberry-install-gpiod.sh caption=raspberry-install-gpiod.sh numbers=left frame=leftline}
+~~~
 sudo apt install libgpiod-dev
 ~~~
 
@@ -189,7 +185,7 @@ El código anterior puede parecer muy complicado para empezar a programar la GPI
 de la Raspberry Pi. Para ello partiremos el código en su diferentes secciones.
 La primera sección consiste en simplemente un comentario.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
 /** Es un pequeño ejemplo de las funcionalidades del interfaz del GPIO  */
 /** de la Raspberry Pi por medio de la librería libgpiod.               */
 /**                                                                     */
@@ -228,7 +224,7 @@ funciones que nos permiten acceder a la GPIO de la Raspberry Pi.
 
 A continuación, tenemos el inicio de la definición de la función `main`.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
 int main()
 {
 ~~~
@@ -238,7 +234,7 @@ programa principal.
 
 En el siguiente segmento de código tenemos la definición del primer objeto.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
     struct gpiod_chip *chip;
 ~~~
 
@@ -251,7 +247,7 @@ almacenar la dirección de ese espacio de memoria.
 
 A continuación, produciremos el objeto por medio de la siguiente línea.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
     chip = gpiod_chip_open_by_name("gpiochip0");
 
 ~~~
@@ -263,7 +259,7 @@ dirección del espacio de memoria.
 
 A continuación, realizaremos la declaración para dos punteros más.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
     struct gpiod_line *led;
     struct gpiod_line *button;
 
@@ -275,7 +271,7 @@ relacionado con la entrada de un botón.
 
 Luego, se inicializarán ambos objetos.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
     led    = gpiod_chip_get_line(chip, 24);
     button = gpiod_chip_get_line(chip, 6);
 
@@ -291,7 +287,7 @@ acceder directamente al *hardware*. Hay que solicitar ese acceso. Recordemos que
 una de las finciones de un sistema operativo es administrar el uso de recursos
 por programas de aplicación.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
     gpiod_line_request_output(led, "myLED", 0);
     gpiod_line_request_input(button, "button");
 
@@ -301,7 +297,7 @@ El programa se diseño fundamentalmente como un [autómata
 temporizado](https://en.wikipedia.org/wiki/Timed_automaton). El automata tiene
 dos estados posible y conmuta de uno a otro después que pasó un tiempo. 
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
     int state = 1;
 ~~~
 
@@ -309,7 +305,7 @@ Emplearemos otra variable, `input`, para almacenar el estado del interruptor.
 Cuando el interruptor es presionado, se envía una señal de 0. Cuando no está
 presionado, da 1.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
     int input = 1;
 ~~~
 
@@ -318,7 +314,7 @@ en la función `setup` del entorno Arduino. A continuación viene el ciclo
 principal (*main loop*). De este ciclo se puede salir cuando se presiona el
 interruptor.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
     while (input == 1) {
 ~~~
 
@@ -329,21 +325,21 @@ significativo](https://es.wikipedia.org/wiki/Operador_a_nivel_de_bits#Invirtiend
 de la variable. Es decir si la variable `state` tiene un valor de 1, pasa a 0, y
 viceversa.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
         state = state ^ 1;
 ~~~
 
 La salida del programa es el led. Utilizamos la variable `state` para encender o
 apagar el led. Para ello nos ayudamos de la función `gpiod_line_set_value`.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
         gpiod_line_set_value(led, state);
 ~~~
 
 Por otro lado, necesitamos leer el valor del pin que esta conectado al botón.
 Esto lo hacemos por medio de la función `gpiod_line_get_value`.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
         input = gpiod_line_get_value(button);
 ~~~
 
@@ -351,7 +347,7 @@ La última instrucción del ciclo es un temporizador que inactiva el proceso por
 un tiempo de $500 000 \mu\textrm{s}$ o equivalentemente 0.5 s. La función usada
 es `usleep(3)`.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
         usleep(500000);
     }
 
@@ -360,7 +356,7 @@ es `usleep(3)`.
 Si presionamos el botón, el ciclo se rompe y el programa empieza a preparar lo
 necesario para finalizar su ejecución. El primer paso es apagar el led. 
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
     gpiod_line_set_value(led, 1);
 ~~~
 
@@ -368,18 +364,16 @@ Así como solicitamos el uso de algunos de los pines de la GPIO, tenemos que
 avisarle al sistema operativo que el programa ya no necesita esos pines. para
 ello se utiliza la función `gpiod_line_release`.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
     gpiod_line_release(led);
     gpiod_line_release(button);
 ~~~
 
 Finalmente función `main` termina.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
     return 0;
 }
 ~~~
 
 ## Conclusiones
-
-## Referencias
