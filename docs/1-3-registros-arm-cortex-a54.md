@@ -55,14 +55,6 @@ locales, entre otras cosas.
 
 ## Bancos de registros
 
-## Ejemplo
-
-(*usar powershell como administrador*) 
-
-- Instalar chocolatey
-- choco install gcc-arm-embedded
-- choco install qemu
-
 ## Para saber más
 
 
