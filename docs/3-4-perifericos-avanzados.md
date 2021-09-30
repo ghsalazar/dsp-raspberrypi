@@ -1,2 +1,5 @@
-VideoCore IV
-------------
+---
+title: Periféricos avanzados
+...
+
+## VideoCore IV

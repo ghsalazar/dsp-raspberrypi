@@ -14,9 +14,10 @@ procesador de la Raspberry Pi y que podemos usar en programas de aplicación. En
 la figura 1, podemos ver el diagrama del conector utilizado por la GPIO.
 
 ![**Figura 1**: Diagrama del conector de la interfaz de
-GPIO](https://www.raspberrypi.org/documentation/computers/images/GPIO-Pinout-Diagram-2.png)
+GPIO [@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/computers/images/GPIO-Pinout-Diagram-2.png)
 
-Los pines de la interfaz de GPIO pueden cumplir una gran variedad de funciones, como por ejemplo:
+Los pines de la interfaz de GPIO pueden cumplir una gran variedad de funciones
+[@RaspberryPiFoundation2020], como por ejemplo:
 
 * Entrada
 * Salida
@@ -37,7 +38,8 @@ Además, algunos pines tienen funciones especiales; tales como:
 Existen varios programas y librerías para utilizar la GPIO de la Raspberry Pi;
 sin embargo, no todos son recomendados por el fabricante y otros se han vuelto
 obsoletos. Uno de los recomendados por el fabricante es
-[`gpiod`](https://kernel.googlesource.com/pub/scm/libs/libgpiod/libgpiod/+/refs/heads/master/README).
+[`gpiod`](https://kernel.googlesource.com/pub/scm/libs/libgpiod/libgpiod/+/refs/heads/master/README)
+[@Golaszewski2021].
 
 El sistema `gpiod` consiste en dos componentes. El primer componente es la
 librería `libgpiod`. La librería permite desarrollar programas en C y C++.
@@ -67,9 +69,11 @@ línea de comando.
 ## Actividad: Comando `pinout`
 
 En la Raspberry Pi, podemos consultar la disposición de las terminales del
-conector de la interfaz GPIO, por medio del comando `pinout`.
+conector de la interfaz GPIO, por medio del comando `pinout`
+[@RaspberryPiFoundation2020].
     
-![**Figura 3**: Resultado de la ejecución del comando `pinout`](https://www.raspberrypi.org/documentation/computers/images/gpiozero-pinout.png)
+![**Figura 3**: Resultado de la ejecución del comando `pinout`
+[@RaspberryPiFoundation2020]](https://www.raspberrypi.org/documentation/computers/images/gpiozero-pinout.png)
 
 
 ## Actividad: Instalar `gpiod`
@@ -90,19 +94,19 @@ Ya que tenemos instalada la librería y los programas, podemos usar comandos
 para manipular la interfaz de GPIO. Por ejemplo, el comando `gpiodetect` muestra
 los diferentes interfaces de la GPIO:
 
-~~~
+~~~{.sh}
 gpiodetect
 ~~~
 
 ![Resultado del comando
-`gpiodetect`](https://raw.githubusercontent.com/ghsalazar/dsp-images/main/images/raspberry-pi-gpiodetect.png)
+`gpiodetect`](https://raw.githubusercontent.com/ghsalazar/dsp-images/main/images/raspberry-pi-gpiodetect.png){width=50%}
 
 Podemos ver el resultado del comando en la figura, donde se muestran tres
 interfaces diferentes. La interfaz que nos interesa es `gpiochip0`. La siguiente
 operación será ver que líneas o pines tiene disponible la interfaz. Esto lo
 hacemos por medio de siguiente comando
 
-~~~
+~~~{.sh}
 gpioinfo gpiochip0
 ~~~
 
@@ -116,14 +120,14 @@ gpioinfo gpiochip0
 Existen otros dos comandos importantes. El primero es `gpioset`. Este comando
 convierte una línea o pin en salida y le da un valor especificado. Por ejemplo,
 
-~~~
+~~~{.sh}
 gpioset gpiochip0 24=1
 ~~~
 
 le indica a la interfaz `gpiochip0` que convierta en salida a la línea 24 o
 `GPIO24` y le asigne un valor de 1. Por otro lado
 
-~~~
+~~~{.sh}
 gpioset gpiochip0 24=0
 ~~~
 
@@ -134,7 +138,7 @@ más capacidades y se recomienda leer su
 El otro comando es `gpioget`. Este comando convierte una línea o pin en entrada
 y lee el valor que tiene. Por ejemplo
 
-~~~
+~~~{.sh}
 gpioget gpiochip0 24
 ~~~
 
@@ -145,7 +149,7 @@ A continuación, se tiene un ejemplo completo, aprovechando el comando gpioinfo.
 También se utiliza el comando [grep](https://es.wikipedia.org/wiki/Grep) para
 filtrar los resultados.
 
-~~~
+~~~{.sh}
 gpioinfo gpiochip0 | grep 24
 gpioset gpiochip0 24=0
 gpioinfo gpiochip0 | grep 24
@@ -207,7 +211,7 @@ blink`) explicita cual nombre tendrá el programa final.
 
 A continuación, se tiene la inclusión de dos archivos de encabezado.
 
-~~~{.c name=blink.c caption=blink.c numbers=left frame=leftline}
+~~~
 #include <unistd.h>
 #include <gpiod.h>
 
@@ -377,3 +381,5 @@ Finalmente función `main` termina.
 ~~~
 
 ## Conclusiones
+
+## Referencias

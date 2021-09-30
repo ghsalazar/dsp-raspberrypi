@@ -1,4 +1,4 @@
-SRC_DIR = ../src
+SRC_DIR = ../_src
 #TARGETS = $(notdir $(patsubst %.md, %.html, $(wildcard $(SRC_DIR)/*.md)))
 TARGETS = $(notdir $(wildcard $(SRC_DIR)/*.md))
 

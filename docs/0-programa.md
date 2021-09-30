@@ -10,7 +10,7 @@
     * Uso y mapeo de memoria interna/externa
         * Manejo de memoria Flash
         * Vector de interrupciones
-* Llamadas al sistema operativo Linux con el SoC Broadcom BCM2837
+* Periféricos Básicos del SoC Broadcom BCM2837
     * Introducción al IDE del DSP
         * Opciones de compilación
         * Opciones de ligado.
@@ -18,10 +18,8 @@
         * Lista de instrucciones.
         * Llamada a funciones.
         * Consideraciones de memoria.
-    * DSP/BIOS.
     * Lenguaje C/C++
         * Depuración de código
-* Periféricos Básicos del SoC Broadcom BCM2837
     * Codificador/Decodificador (Codec)
     * Temporizadores
     * Puerto General de Entradas/Salidas (GPIO) 
@@ -33,6 +31,17 @@
     * Puerto serie asíncrono multicanal (MCASP)
     * Acceso directo a Memoria Enriquecida (EDMA)
     * Interface Servidor - Puerto
+* Llamadas al sistema operativo Linux con el SoC Broadcom BCM2837
+    * Introducción al IDE del DSP
+        * Opciones de compilación
+        * Opciones de ligado.
+    * Lenguaje ensamblador y directivas de ensamblador.
+        * Lista de instrucciones.
+        * Llamada a funciones.
+        * Consideraciones de memoria.
+    * DSP/BIOS.
+    * Lenguaje C/C++
+        * Depuración de código
 * Ambientes de programación alternativos para el SoC Broadcom BCM2837DSP
 * Implementación Filtros Digitales con el SoC Broadcom BCM2837
     * FIR
@@ -40,3 +49,17 @@
     * Adaptable. 
 * Implementacion de una RNA con el SoC Broadcom BCM2837
 * Proyecto  con el SoC Broadcom BCM2837
+
+## Versión 2
+
+1. Arquitectura
+    1. Unidades funcionales
+    2. Registros
+    3. Modos de direccionamiento
+    4. Procesamiento paralelo
+    5. Memoria (mmap)
+2. Linux
+    1. Compilador
+    2. Llamadas a sistema
+    3. Depurador
+3. Periféricos (con mmap o /dev/gpiomem?) (https://bob.cs.sonoma.edu/IntroCompOrg-RPi/sec-gpio-mem.html)

@@ -1,4 +1,4 @@
-SRC_DIR = ../src
+SRC_DIR = ../_src
 SRC = $(wildcard $(SRC_DIR)/*.md)
 
 all: $(SRC)
