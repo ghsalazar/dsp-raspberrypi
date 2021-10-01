@@ -40,39 +40,38 @@ Sin embargo, no siempre es posible mapear todas las operaciones que se realizan
 sobre el dispositivo como escrituras y lecturas. Para esas operaciones existen
 subrutinas especializadas.
 
-## Arquitectura de la interfaz `gpiod`
-
-En la parte más baja, la base de la arquitectura, es el 
-
 ![Arquitectura de la interfaz `gpiod`.](../assets/figures/arquitectura-gpiod.svg)
 
-
-
+En la figura anterior, podemos ver como funciona este sistema. Una aplicación
+puede hacer las llamadas a sistema directamente o por medio de una librería
+(`libgpiod`), como se muestra en la figura. Las llamadas a sistema operan por
+medio del sistema de archivos del sistema operativo, que ofrece la interfaz
+común de archivo y se conecta al controlador de dispositivo `gpiod`. El
+controlador accede la dirección física del SoC Broadcom 2837 y escribe valores a
+los registros adecuados de la GPIO, o lee los valores que se encuentran en esos
+registros.
 ## Librería `libgpiod`
 
+Existen diversas formas de acceder a la GPIO. Sin embargo, la forma sugerida
+actualmente por los desarrolladores de Linux es por medio de la librería
+`libgpiod`. Si uno instala el paquete `gpiod`, se incluyó el paquete de la
+librería `libgpiod`.
 
-
-## Aplicaciones con `libgpiod`
-
-El uso de programas en el espacio de usuario puede permitir acelerar el
-desarrollo de una aplicación; sin embargo, este tipo de programas pueden
-alentar un proceso. Por lo tanto, conviene normalmente utilizar un lenguaje
-compilado para asegurar un mejor desempeño.
-
-Al instalar los programas en el espacio del usuario, se incluyó el paquete
-de la librería `libgpio`; pero para poder desarrollar un programa en C
-se necesita además los archivos de encabezado. Para ello instalaremos el paquete
-`libgpio-dev` por medio de las siguientes instrucciones
+Pero para poder desarrollar un programa en C, necesitamos además los archivos de
+encabezado. Para ello instalaremos el paquete `libgpiod-dev` por medio de las
+siguiente instrucción:
 
 <<raspberry-install-gpiod.sh>>=
 sudo apt install libgpiod-dev
 @
 
 Una vez instalada la librería es posible desarrollar un programa en C,
-como el del ejemplo del siguiente listado.
+como vemos en el siguiente ejemplo.
 
 
 ## El programa `blink`
+
+{% include code.html src="../examples/blink.c" %}
 
 <script src="http://gist-it.appspot.com/https://github.com/ghsalazar/dsp-raspberrypi/raw/main/examples/blink.c"></script>
 
