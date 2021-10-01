@@ -40,9 +40,11 @@ Sin embargo, no siempre es posible mapear todas las operaciones que se realizan
 sobre el dispositivo como escrituras y lecturas. Para esas operaciones existen
 subrutinas especializadas.
 
-## Arquitectura de la interfaz GPIOD
+## Arquitectura de la interfaz `gpiod`
 
+En la parte más baja, la base de la arquitectura, es el 
 
+![Arquitectura de la interfaz `gpiod`.](../assets/figures/arquitectura-gpiod.svg)
 
 
 
