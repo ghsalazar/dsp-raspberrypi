@@ -2,11 +2,14 @@ digraph gpiod
 {
     subgraph cluster_usuario {
         label="Espacio de usuario";
-        aplicacion [label="Aplicación"];    
+        labeljust = "l";
+        aplicacion [label="Aplicación"];
+        aplicacion -> libgpiod;
     }
 
     subgraph cluster_kernel {
         label="Kernel";
+        labeljust = "l";
         llamadasSistema [label="Llamadas a sistema"]
         sistemaArchivos [label="Sistema de Archivos"];
         llamadasSistema -> sistemaArchivos -> gpiod;
@@ -14,9 +17,10 @@ digraph gpiod
 
     subgraph cluster_hardware {
         label="Hardware";
-        GPIO;
+        labeljust = "l";
+        GPIO [label="Entrada/Salida de Propósito General (GPIO)"];
     }
 
-    aplicacion -> llamadasSistema;
+    libgpiod -> llamadasSistema;
     gpiod -> GPIO;
 }

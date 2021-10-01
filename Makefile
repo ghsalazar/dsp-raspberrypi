@@ -1,7 +1,7 @@
 all:
 	make -C examples
 	make -C docs
-	make -C assets/images
+	make -C assets/figures
 
 .PHONNY: clean
 
