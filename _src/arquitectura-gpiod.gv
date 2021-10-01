@@ -1,0 +1,22 @@
+digraph gpiod 
+{
+    subgraph cluster_usuario {
+        label="Espacio de usuario";
+        aplicacion [label="Aplicación"];    
+    }
+
+    subgraph cluster_kernel {
+        label="Kernel";
+        llamadasSistema [label="Llamadas a sistema"]
+        sistemaArchivos [label="Sistema de Archivos"];
+        llamadasSistema -> sistemaArchivos -> gpiod;
+    }
+
+    subgraph cluster_hardware {
+        label="Hardware";
+        GPIO;
+    }
+
+    aplicacion -> llamadasSistema;
+    gpiod -> GPIO;
+}
