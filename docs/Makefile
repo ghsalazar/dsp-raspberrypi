@@ -12,7 +12,7 @@ all: $(TARGETS)
 	sh ../etc/mdweb/src/mdweave  $< 	|	pandoc $(HTMLFLAGS) -f markdown	-o $@
 
 %.md:: $(SRC_DIR)/%.md
-	sh ../etc/mdweb/src/mdweave  $< 	> $@
+	sh ../etc/mdweb/src/mdweave  $< 	|	gpp -H	> $@
 
 .PHONNY: clean distclean
 
