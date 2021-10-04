@@ -112,6 +112,8 @@ int main()
 
 ~~~
 
+<script src="http://gist-it.appspot.com/https://github.com/ghsalazar/dsp-raspberrypi/raw/main/examples/blink.c"></script>
+
 El código anterior puede parecer muy complicado para empezar a programar la GPIO
 de la Raspberry Pi. Para ello partiremos el código en su diferentes secciones.
 La primera sección consiste en simplemente un comentario.
@@ -220,7 +222,7 @@ por programas de aplicación.
 
 ~~~
     gpiod_line_request_output(led, "myLED", 0);
-    gpiod_line_request_input(button, "button");
+    gpiod_line_request_input(button, "myButton");
 
 ~~~
 
@@ -309,4 +311,7 @@ Finalmente función `main` termina.
 
 ## Conclusiones
 
-## Referencias
+El mejor método de acceder a la GPIO bajo GNU/Linux es por medio de la librería
+`libgpiod`. Este método no sólo es más seguro sino, además, es más portable.
+Este método permite controlar a la interfaz GPIO de la Raspberry Pi, sin tener
+que acceder a la memoria dierectamente.
