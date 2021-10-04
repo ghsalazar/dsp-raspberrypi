@@ -71,6 +71,9 @@ como vemos en el siguiente ejemplo.
 
 ## El programa `blink`
 
+~~~
+<#include "../examples/blink.c">
+~~~
 
 <script src="http://gist-it.appspot.com/https://github.com/ghsalazar/dsp-raspberrypi/raw/main/examples/blink.c"></script>
 
