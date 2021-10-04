@@ -112,8 +112,6 @@ int main()
 
 ~~~
 
-<script src="http://gist-it.appspot.com/https://github.com/ghsalazar/dsp-raspberrypi/raw/main/examples/blink.c"></script>
-
 El código anterior puede parecer muy complicado para empezar a programar la GPIO
 de la Raspberry Pi. Para ello partiremos el código en su diferentes secciones.
 La primera sección consiste en simplemente un comentario.
