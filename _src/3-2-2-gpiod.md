@@ -284,6 +284,15 @@ Finalmente función `main` termina.
 }
 @
 
+El código fuente completo lo pueden descargar del [siguiente enlace en
+GitHub](https://raw.githubusercontent.com/ghsalazar/dsp-raspberrypi/main/examples/blink.c).
+
+Para el compilar el código, se utiliza el comando que se indica en el comentario:
+
+~~~
+gcc blink.c -lgpiod -o blink
+~~~
+
 ## Ejercicio
 
 Implemente el circuito requerido para conectar un botón de acuerdo a lo
