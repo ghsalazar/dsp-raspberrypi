@@ -40,7 +40,9 @@ Sin embargo, no siempre es posible mapear todas las operaciones que se realizan
 sobre el dispositivo como escrituras y lecturas. Para esas operaciones existen
 subrutinas especializadas.
 
-![Arquitectura de la interfaz `gpiod`.](../assets/figures/arquitectura-gpiod.svg)
+|![Arquitectura de la interfaz `gpiod`.](../assets/figures/arquitectura-gpiod.svg)|
+|----|
+|Figura 2: Arquitectura del sistema de `gpiod`.|
 
 En la figura anterior, podemos ver como funciona este sistema. Una aplicación
 puede hacer las llamadas a sistema directamente o por medio de una librería
@@ -70,12 +72,12 @@ Una vez instalada la librería es posible desarrollar un programa en C.
 
 ## El programa `blink`
 
-En la figura 1, podemos ver el circuito para encender y apagar un led con la
+En la figura 2, podemos ver el circuito para encender y apagar un led con la
 Raspberry Pi 3B+.
 
 |![Circuito para encender y apagar un led con la Raspberry Pi 3B+](../assets/static/raspberry-pi-gpio-led.png)|
 |----|
-|Figura 1: Circuito para encender y apagar un led con la Raspberry Pi 3B+.|
+|Figura 2: Circuito para encender y apagar un led con la Raspberry Pi 3B+.|
 
 A partir de este ejemplo, desarrollaremos un programa para encender y apagar un led.
 Esta operación se mantendrá hasta que se apriete un botón.

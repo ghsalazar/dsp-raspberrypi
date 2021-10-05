@@ -40,7 +40,9 @@ Sin embargo, no siempre es posible mapear todas las operaciones que se realizan
 sobre el dispositivo como escrituras y lecturas. Para esas operaciones existen
 subrutinas especializadas.
 
-![Arquitectura de la interfaz `gpiod`.](../assets/figures/arquitectura-gpiod.svg)
+|![Arquitectura de la interfaz `gpiod`.](../assets/figures/arquitectura-gpiod.svg)|
+|----|
+|Figura 2: Arquitectura del sistema de `gpiod`.|
 
 En la figura anterior, podemos ver como funciona este sistema. Una aplicación
 puede hacer las llamadas a sistema directamente o por medio de una librería
@@ -65,11 +67,23 @@ siguiente instrucción:
 sudo apt install libgpiod-dev
 ~~~
 
-Una vez instalada la librería es posible desarrollar un programa en C,
-como vemos en el siguiente ejemplo.
+Una vez instalada la librería es posible desarrollar un programa en C.
 
 
 ## El programa `blink`
+
+En la figura 2, podemos ver el circuito para encender y apagar un led con la
+Raspberry Pi 3B+.
+
+|![Circuito para encender y apagar un led con la Raspberry Pi 3B+](../assets/static/raspberry-pi-gpio-led.png)|
+|----|
+|Figura 2: Circuito para encender y apagar un led con la Raspberry Pi 3B+.|
+
+A partir de este ejemplo, desarrollaremos un programa para encender y apagar un led.
+Esta operación se mantendrá hasta que se apriete un botón.
+
+El código completo del programa se uestra a continuación. Posteriormente
+explicaremos que hace cada línea de código.
 
 ~~~
 /** Es un pequeño ejemplo de las funcionalidades del interfaz del GPIO  */
@@ -111,8 +125,6 @@ int main()
 }
 
 ~~~
-
-<script src="http://gist-it.appspot.com/https://github.com/ghsalazar/dsp-raspberrypi/raw/main/examples/blink.c"></script>
 
 El código anterior puede parecer muy complicado para empezar a programar la GPIO
 de la Raspberry Pi. Para ello partiremos el código en su diferentes secciones.
@@ -308,6 +320,11 @@ Finalmente función `main` termina.
     return 0;
 }
 ~~~
+
+## Ejercicio
+
+Implemente el circuito requerido para conectar un botón de acuerdo a lo
+especificado en el programas. 
 
 ## Conclusiones
 
