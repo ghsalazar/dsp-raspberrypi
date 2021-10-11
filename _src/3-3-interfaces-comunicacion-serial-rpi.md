@@ -18,6 +18,29 @@ La tarjeta Raspberry Pi tiene varias interfaces físicas de comunicación serial
 * Interfaz de periféricos serie, y
 * Circuito inter-integrado.
 
+## Comunicación serial
+
+La función de la comunicación es el envío de un mensaje de un transmisor a un
+receptor. Los mensajes son listas de símbolos. En comunicaciones digitales los
+símbolos se componen de una serie de bits.
+
+Se tienen dos tipos de comunicación digital: paralela y serial. En la
+comunicación en paralelo, todos los bits de cada símbolo se envían
+simultáneamente y, por lo tanto, debe haber al menos tantas líneas de
+comunicación como bits de el símbolo a transmitir. La comunicación paralela
+puede ser muy rápida, pero surgen varios problemas cuando se transmiten en
+paralelo una gran cantidad de bits, como interferencias o problemas de
+desincronización.
+
+En cuanto a la comunicación serial, cada símbolo se envía de un bit a la vez, de
+forma secuencial, a través de un canal o bus de comunicación. Una ventaja de la
+comunicación serial es que requiere menos líneas de transmisión que la
+comunicación en paralelo que lleva la misma información.
+
+Con la misma frecuencia de transmisión, la comunicación paralela tiene un
+rendimiento superior. La comunicación serial debe compensar esta desventaja con
+una frecuencia de transmisión mayor.
+
 ## Comunicación asíncrona serial
 
 La [comunicación asíncrona
@@ -68,11 +91,10 @@ En la actualidad, usamos un dispositivo llamado [transmisor--receptor asíncrono
 universal](https://es.wikipedia.org/wiki/Universal_Asynchronous_Receiver-Transmitter) (UART,
 por sus siglas en inglés) para la comunicación asíncrona serial.
 
-En el siguiente video podemos ver como se implementaba electromecánicamente una
-interfaz asíncrona serial. Como ya mencionamos, los teletipos fueron unos de los
-precursores de la comunicación asíncrona serial.
+En el siguiente video se muestra las bases de la comunicación serial y en
+particular la comunicación asíncrona.
 
-<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"> <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/x4971bc" width="100%" height="100%" allowfullscreen > </iframe> </div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/u1pKHLy4yxk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Interfaz de periféricos serie
 
@@ -125,6 +147,15 @@ Un ejemplo con la Raspberry Pi es [la comunicación con una tarjeta
 Arduino](https://blog.330ohms.com/2020/07/07/como-conectar-arduino-y-raspberry-pi-por-comunicacion-i2c/).
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mi24IxXEqzA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## Historia de la comunicación serial
+
+En el siguiente video podemos ver como se implementaba electromecánicamente una
+interfaz asíncrona serial. Como ya mencionamos, los teletipos fueron unos de los
+precursores de la comunicación asíncrona serial.
+
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"> <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/x4971bc" width="100%" height="100%" allowfullscreen > </iframe> </div>
 
 
 ## Conclusiones
