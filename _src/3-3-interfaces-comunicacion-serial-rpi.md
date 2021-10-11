@@ -27,7 +27,7 @@ símbolos se componen de una serie de bits.
 Se tienen dos tipos de comunicación digital: paralela y serial. En la
 comunicación en paralelo, todos los bits de cada símbolo se envían
 simultáneamente y, por lo tanto, debe haber al menos tantas líneas de
-comunicación como bits de el símbolo a transmitir. La comunicación paralela
+comunicación como bits del símbolo a transmitir. La comunicación paralela
 puede ser muy rápida, pero surgen varios problemas cuando se transmiten en
 paralelo una gran cantidad de bits, como interferencias o problemas de
 desincronización.
@@ -87,14 +87,21 @@ Otros parámetros los usamos de manera implícita o, rara vez, de forma explíci
 * La definición de los símbolos de marca y espacio, es decir cuando un bit es 0
   y cuando es 1.
 
-En la actualidad, usamos un dispositivo llamado [transmisor--receptor asíncrono
-universal](https://es.wikipedia.org/wiki/Universal_Asynchronous_Receiver-Transmitter) (UART,
-por sus siglas en inglés) para la comunicación asíncrona serial.
-
 En el siguiente video se muestra las bases de la comunicación serial y en
 particular la comunicación asíncrona.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/u1pKHLy4yxk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+En la actualidad, usamos un dispositivo llamado [transmisor--receptor asíncrono
+universal](https://es.wikipedia.org/wiki/Universal_Asynchronous_Receiver-Transmitter)
+(UART, por sus siglas en inglés) para la comunicación asíncrona serial. Una
+ventaja del UART es que el formato de datos y las velocidades de transmisión son
+configurables. Este dispositivo nos permite implementar diferentes formas de
+comunicación serial asíncrona.
+
+En el siguiente video se muestra el funcionamiento de un UART.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fnVr2jncRiE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Interfaz de periféricos serie
 
@@ -134,7 +141,7 @@ comunicación síncrona, cliente--servidor, con [conmutación de
 paquetes](https://es.wikipedia.org/wiki/Conmutaci%C3%B3n_de_paquetes) y
 topología de bus.
 
-Es importante remarcar, que a diferencia de la SPI, I2C puede tener múltiples
+Es importante remarcar que, a diferencia de la SPI, I2C puede tener múltiples
 servidores.
 
 Se utiliza para la comunicación entre microprocesadores y periféricos.
