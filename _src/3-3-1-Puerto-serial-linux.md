@@ -208,6 +208,11 @@ una Raspberry Pi y una Arduino.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nh5geiIDqjA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+
+Un recurso que realiza lo mismo pero por medio de otro interfaz es [Raspberry Pi
+Arduino Serial Communication – Everything You Need To
+Know](https://roboticsbackend.com/raspberry-pi-arduino-serial-communication/).
+
 ## Conclusiones
 
 El objetivo de la presente actividad fue implementar la comunicación entre
